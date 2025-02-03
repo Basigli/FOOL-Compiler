@@ -15,7 +15,7 @@ progbody : LET dec+ IN exp SEMIC  #letInProg
          ;
   
 dec : VAR ID COLON type ASS exp SEMIC  #vardec
-    | FUN ID COLON type LPAR (ID COLON type (COMMA ID COLON type)* )? RPAR 
+    | FUN ID COLON type LPAR (ID COLON type (COMMA ID COLON type)* )? RPAR
         	(LET dec+ IN)? exp SEMIC   #fundec
     ;
            
