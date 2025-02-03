@@ -30,7 +30,6 @@ exp     : exp TIMES exp #times
 	    | PRINT LPAR exp RPAR #print
 	    | ID #id
 	    | ID LPAR (exp (COMMA exp)* )? RPAR #call
-
 	    | exp GEQ exp #geq
 	    | exp LEQ exp #leq
 	    | NOT exp #not
@@ -72,7 +71,6 @@ VAR     : 'var' ;
 FUN	    : 'fun' ;	  
 INT	    : 'int' ;
 BOOL	: 'bool' ;
-
 LEQ     : '<=';
 GEQ     : '>=';
 NOT     : '!';
