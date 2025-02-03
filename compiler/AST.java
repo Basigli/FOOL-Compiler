@@ -24,6 +24,15 @@ public class AST {
 		@Override
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
+
+
+	public static class NotNode extends Node {
+		final Node exp;
+		NotNode(Node e) {exp = e;}
+
+		@Override
+		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
+	}
 	
 	public static class FunNode extends DecNode {
 		final String id;
@@ -116,6 +125,15 @@ public class AST {
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
 
+	public static class DivisionNode extends Node {
+		final Node left;
+		final Node right;
+		DivisionNode(Node l, Node r) {left = l; right = r;}
+
+		@Override
+		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
+	}
+
 	public static class GreaterEqualNode extends Node {
 		final Node left;
 		final Node right;
@@ -130,6 +148,25 @@ public class AST {
 		final Node left;
 		final Node right;
 		LessEqualNode(Node l, Node r) {left = l; right = r;}
+
+		@Override
+		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
+	}
+
+
+	public static class AndNode extends Node {
+		final Node left;
+		final Node right;
+		AndNode(Node l, Node r) {left = l; right = r;}
+
+		@Override
+		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
+	}
+
+	public static class OrNode extends Node {
+		final Node left;
+		final Node right;
+		OrNode(Node l, Node r) {left = l; right = r;}
 
 		@Override
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
@@ -159,6 +196,7 @@ public class AST {
 		@Override
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
+
 	
 	public static class BoolNode extends Node {
 		final Boolean val;
