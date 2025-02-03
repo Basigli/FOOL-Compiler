@@ -1,4 +1,4 @@
-package compiler; 
+package compiler;
 
 import java.util.*;
 import compiler.lib.*;
@@ -6,48 +6,56 @@ import compiler.lib.*;
 public class AST {
 	
 	public static class ProgLetInNode extends Node {
-		List<Node> declist;
-		Node exp;
-		ProgLetInNode(List<Node> d, Node e) {declist = d; exp = e;}
+		final List<DecNode> declist;
+		final Node exp;
+		ProgLetInNode(List<DecNode> d, Node e) {
+			declist = Collections.unmodifiableList(d); 
+			exp = e;
+		}
 
 		@Override
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
 
 	public static class ProgNode extends Node {
-		Node exp;
+		final Node exp;
 		ProgNode(Node e) {exp = e;}
 
 		@Override
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
 	
-	public static class FunNode extends Node {
-		String id;
-		TypeNode retType;
-		List<ParNode> parlist;
-		List<Node> declist; 
-		Node exp;
-		FunNode(String i, TypeNode rt, List<ParNode> pl, List<Node> dl, Node e) {
-	    	id=i; retType=rt; parlist=pl; declist=dl; exp=e;}
+	public static class FunNode extends DecNode {
+		final String id;
+		final TypeNode retType;
+		final List<ParNode> parlist;
+		final List<DecNode> declist; 
+		final Node exp;
+		FunNode(String i, TypeNode rt, List<ParNode> pl, List<DecNode> dl, Node e) {
+	    	id=i; 
+	    	retType=rt; 
+	    	parlist=Collections.unmodifiableList(pl); 
+	    	declist=Collections.unmodifiableList(dl); 
+	    	exp=e;
+	    }
+		
+		//void setType(TypeNode t) {type = t;}
 		
 		@Override
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
 
-	public static class ParNode extends Node {
-		String id;
-		TypeNode type;
+	public static class ParNode extends DecNode {
+		final String id;
 		ParNode(String i, TypeNode t) {id = i; type = t;}
 
 		@Override
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
 	
-	public static class VarNode extends Node {
-		String id;
-		TypeNode type;
-		Node exp;
+	public static class VarNode extends DecNode {
+		final String id;
+		final Node exp;
 		VarNode(String i, TypeNode t, Node v) {id = i; type = t; exp = v;}
 
 		@Override
@@ -55,7 +63,7 @@ public class AST {
 	}
 		
 	public static class PrintNode extends Node {
-		Node exp;
+		final Node exp;
 		PrintNode(Node e) {exp = e;}
 
 		@Override
@@ -63,9 +71,9 @@ public class AST {
 	}
 	
 	public static class IfNode extends Node {
-		Node cond;
-		Node th;
-		Node el;
+		final Node cond;
+		final Node th;
+		final Node el;
 		IfNode(Node c, Node t, Node e) {cond = c; th = t; el = e;}
 
 		@Override
@@ -73,8 +81,8 @@ public class AST {
 	}
 	
 	public static class EqualNode extends Node {
-		Node left;
-		Node right;
+		final Node left;
+		final Node right;
 		EqualNode(Node l, Node r) {left = l; right = r;}
 
 		@Override
@@ -82,8 +90,8 @@ public class AST {
 	}
 	
 	public static class TimesNode extends Node {
-		Node left;
-		Node right;
+		final Node left;
+		final Node right;
 		TimesNode(Node l, Node r) {left = l; right = r;}
 
 		@Override
@@ -91,8 +99,8 @@ public class AST {
 	}
 	
 	public static class PlusNode extends Node {
-		Node left;
-		Node right;
+		final Node left;
+		final Node right;
 		PlusNode(Node l, Node r) {left = l; right = r;}
 
 		@Override
@@ -100,18 +108,21 @@ public class AST {
 	}
 	
 	public static class CallNode extends Node {
-		String id;
-		List<Node> arglist = new ArrayList<Node>();
+		final String id;
+		final List<Node> arglist;
 		STentry entry;
 		int nl;
-		CallNode(String i, List<Node> p) {id = i; arglist = p;}
+		CallNode(String i, List<Node> p) {
+			id = i; 
+			arglist = Collections.unmodifiableList(p);
+		}
 
 		@Override
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
 	
 	public static class IdNode extends Node {
-		String id;
+		final String id;
 		STentry entry;
 		int nl;
 		IdNode(String i) {id = i;}
@@ -121,7 +132,7 @@ public class AST {
 	}
 	
 	public static class BoolNode extends Node {
-		Boolean val;
+		final Boolean val;
 		BoolNode(boolean n) {val = n;}
 
 		@Override
@@ -129,7 +140,7 @@ public class AST {
 	}
 	
 	public static class IntNode extends Node {
-		Integer val;
+		final Integer val;
 		IntNode(Integer n) {val = n;}
 
 		@Override
@@ -137,9 +148,12 @@ public class AST {
 	}
 	
 	public static class ArrowTypeNode extends TypeNode {
-		List<TypeNode> parlist;
-		TypeNode ret;
-		ArrowTypeNode(List<TypeNode> p, TypeNode r) {parlist = p; ret = r;}
+		final List<TypeNode> parlist;
+		final TypeNode ret;
+		ArrowTypeNode(List<TypeNode> p, TypeNode r) {
+			parlist = Collections.unmodifiableList(p); 
+			ret = r;
+		}
 
 		@Override
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}

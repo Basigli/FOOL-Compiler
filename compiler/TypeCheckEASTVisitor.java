@@ -3,7 +3,7 @@ package compiler;
 import compiler.AST.*;
 import compiler.exc.*;
 import compiler.lib.*;
-import static compiler.lib.FOOLlib.*;
+import static compiler.TypeRels.*;
 
 //visitNode(n) fa il type checking di un Node n e ritorna:
 //- per una espressione, il suo tipo (oggetto BoolTypeNode o IntTypeNode)
@@ -51,7 +51,7 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 			} catch (TypeException e) {
 				System.out.println("Type checking error in a declaration: " + e.text);
 			}
-		if ( !isSubtype(visit(n.exp),ckvisit(n.retType)) ) //check
+		if ( !isSubtype(visit(n.exp),ckvisit(n.retType)) ) 
 			throw new TypeException("Wrong return type for function " + n.id,n.getLine());
 		return null;
 	}
@@ -59,7 +59,7 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 	@Override
 	public TypeNode visitNode(VarNode n) throws TypeException {
 		if (print) printNode(n,n.id);
-		if ( !isSubtype(visit(n.exp),ckvisit(n.type)) ) //check
+		if ( !isSubtype(visit(n.exp),ckvisit(n.getType())) )
 			throw new TypeException("Incompatible value for variable " + n.id,n.getLine());
 		return null;
 	}
@@ -113,14 +113,14 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 	@Override
 	public TypeNode visitNode(CallNode n) throws TypeException {
 		if (print) printNode(n,n.id);
-		TypeNode t = visit(n.entry); // STentry visit
+		TypeNode t = visit(n.entry); 
 		if ( !(t instanceof ArrowTypeNode) )
 			throw new TypeException("Invocation of a non-function "+n.id,n.getLine());
 		ArrowTypeNode at = (ArrowTypeNode) t;
 		if ( !(at.parlist.size() == n.arglist.size()) )
 			throw new TypeException("Wrong number of parameters in the invocation of "+n.id,n.getLine());
 		for (int i = 0; i < n.arglist.size(); i++)
-			if ( !(FOOLlib.isSubtype(visit(n.arglist.get(i)),at.parlist.get(i))) )
+			if ( !(isSubtype(visit(n.arglist.get(i)),at.parlist.get(i))) )
 				throw new TypeException("Wrong type for "+(i+1)+"-th parameter in the invocation of "+n.id,n.getLine());
 		return at.ret;
 	}
@@ -128,7 +128,7 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 	@Override
 	public TypeNode visitNode(IdNode n) throws TypeException {
 		if (print) printNode(n,n.id);
-		TypeNode t = visit(n.entry); // STentry visit
+		TypeNode t = visit(n.entry); 
 		if (t instanceof ArrowTypeNode)
 			throw new TypeException("Wrong usage of function identifier " + n.id,n.getLine());
 		return t;
@@ -168,12 +168,12 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 		return null;
 	}
 
-//
+// STentry (ritorna campo type)
 
 	@Override
 	public TypeNode visitSTentry(STentry entry) throws TypeException {
 		if (print) printSTentry("type");
-		return ckvisit(entry.type); //check
+		return ckvisit(entry.type); 
 	}
 
 }

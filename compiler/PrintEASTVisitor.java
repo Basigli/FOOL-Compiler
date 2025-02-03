@@ -36,14 +36,14 @@ public class PrintEASTVisitor extends BaseEASTVisitor<Void,VoidException> {
 	@Override
 	public Void visitNode(ParNode n) {
 		printNode(n,n.id);
-		visit(n.type);
+		visit(n.getType());
 		return null;
 	}
 
 	@Override
 	public Void visitNode(VarNode n) {
 		printNode(n,n.id);
-		visit(n.type);
+		visit(n.getType());
 		visit(n.exp);
 		return null;
 	}
