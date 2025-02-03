@@ -1,4 +1,4 @@
-package compiler.exc;
+package compiler;
 
 public class VoidException extends RuntimeException {
 

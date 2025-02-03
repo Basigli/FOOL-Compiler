@@ -2,11 +2,12 @@ package compiler;
 
 import java.util.*;
 
+import compiler.exc.FOOLBaseVisitor;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import compiler.AST.*;
-import compiler.FOOLParser.*;
+import compiler.exc.FOOLParser.*;
 import compiler.lib.*;
 import static compiler.lib.FOOLlib.*;
 
