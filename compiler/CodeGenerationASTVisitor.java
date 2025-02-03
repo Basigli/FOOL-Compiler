@@ -205,4 +205,42 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 				"not"
 		);
 	}
+
+	@Override
+	public String visitNode(GreaterEqualNode n) {
+		if (print) printNode(n);
+		return nlJoin(
+				visit(n.left),
+				visit(n.right),
+				">="
+		);
+	}
+	@Override
+	public String visitNode(LessEqualNode n) {
+		if (print) printNode(n);
+		return nlJoin(
+				visit(n.left),
+				visit(n.right),
+				"<="
+		);
+	}
+
+	@Override
+	public String visitNode(AndNode n) {
+		if (print) printNode(n);
+		return nlJoin(
+				visit(n.left),
+				visit(n.right),
+				"&&"
+		);
+	}
+	@Override
+	public String visitNode(OrNode n) {
+		if (print) printNode(n);
+		return nlJoin(
+				visit(n.left),
+				visit(n.right),
+				"||"
+		);
+	}
 }
