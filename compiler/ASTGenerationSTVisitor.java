@@ -74,11 +74,75 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 	}
 
 	@Override
+	public Node visitMinus(MinusContext c) {
+		if (print) printVarAndProdName(c);
+		Node n = new MinusNode(visit(c.exp(0)), visit(c.exp(1)));
+		n.setLine(c.MINUS().getSymbol().getLine());
+		return n;
+	}
+
+	@Override
 	public Node visitEq(EqContext c) {
 		if (print) printVarAndProdName(c);
 		Node n = new EqualNode(visit(c.exp(0)), visit(c.exp(1)));
 		n.setLine(c.EQ().getSymbol().getLine());		
         return n;		
+	}
+
+	@Override
+	public Node visitEq(GeqContext c) {
+		if (print) printVarAndProdName(c);
+		Node n = new GreaterEqualNode(visit(c.exp(0)), visit(c.exp(1)));
+		n.setLine(c.GEQ().getSymbol().getLine());
+		return n;
+	}
+
+	@Override
+	public Node visitEq(LeqContext c) {
+		if (print) printVarAndProdName(c);
+		Node n = new LessEqualNode(visit(c.exp(0)), visit(c.exp(1)));
+		n.setLine(c.LEQ().getSymbol().getLine());
+		return n;
+	}
+
+	@Override
+	public Node visitEq(NotContext c) {
+		if (print) printVarAndProdName(c);
+		Node n = new NotNode(visit(c.exp(0)));
+		n.setLine(c.NOT().getSymbol().getLine());
+		return n;
+	}
+
+	@Override
+	public Node visitEq(AndContext c) {
+		if (print) printVarAndProdName(c);
+		Node n = new AndNode(visit(c.exp(0)), visit(c.exp(1)));
+		n.setLine(c.AND().getSymbol().getLine());
+		return n;
+	}
+
+	@Override
+	public Node visitEq(OrContext c) {
+		if (print) printVarAndProdName(c);
+		Node n = new OrNode(visit(c.exp(0)), visit(c.exp(1)));
+		n.setLine(c.OR().getSymbol().getLine());
+		return n;
+	}
+
+	@Override
+	public Node visitEq(DivisionContext c) {
+		if (print) printVarAndProdName(c);
+		Node n = new DivisionNode(visit(c.exp(0)), visit(c.exp(1)));
+		n.setLine(c.DIVISION().getSymbol().getLine());
+		return n;
+	}
+
+	@Override
+	public Node visitEq(OrContext c) {
+		if (print) printVarAndProdName(c);
+		Node n = new OrNode(visit(c.exp(0)), visit(c.exp(1)));
+		n.setLine(c.OR().getSymbol().getLine());
+		return n;
 	}
 
 	@Override
