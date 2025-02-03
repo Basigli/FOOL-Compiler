@@ -200,6 +200,8 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 
 	public String visitNode(NotNode n) {
 		if (print) printNode(n);
+		String l1 = freshLabel();
+		String l2 = freshLabel();
 		return nlJoin(
 				visit(n.exp),
 				"push 0",
@@ -212,15 +214,6 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 		);
 	}
 
-	@Override
-	public String visitNode(GreaterEqualNode n) {
-		if (print) printNode(n);
-		return nlJoin(
-				visit(n.left),
-				visit(n.right),
-				">="
-		);
-	}
 	@Override
 	public String visitNode(LessEqualNode n) {
 		if (print) printNode(n);
@@ -239,6 +232,27 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 	}
 
 	@Override
+	public String visitNode(GreaterEqualNode n) {
+		if (print) printNode(n);
+		String l1 = freshLabel();
+		String l2 = freshLabel();
+		String l3 = freshLabel();
+		return nlJoin(
+				visit(n.left),
+				visit(n.right),
+				"beq " + l1,
+				"bleq " + l2,
+				"push 1",
+				"b " + l3,
+				l1 + ":",
+				"push 1",
+				l2 + ":",
+				"push 0",
+				l3 + ":"
+		);
+	}
+
+	@Override
 	public String visitNode(AndNode n) {
 		if (print) printNode(n);
 		return nlJoin(
@@ -247,6 +261,8 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 				"&&"
 		);
 	}
+
+
 	@Override
 	public String visitNode(OrNode n) {
 		if (print) printNode(n);
