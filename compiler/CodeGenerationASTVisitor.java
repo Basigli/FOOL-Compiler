@@ -336,4 +336,13 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 		);
 		return "push " + label;
 	}
+	@Override
+	public String visitNode(ClassNode n) {
+		List<String> dispatchTable = null;
+		for (Node dec : n.methodList) {
+			visit(dec);
+			dispatchTable.add(((MethodNode) dec).id);
+		}
+		return null;
+	}
 }
