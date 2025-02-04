@@ -12,7 +12,6 @@ public class AST {
 			declist = Collections.unmodifiableList(d); 
 			exp = e;
 		}
-
 		@Override
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
@@ -220,11 +219,6 @@ public class AST {
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
 
-	public static class ClassTypeNode extends TypeNode {
-		@Override
-		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
-	}
-
 
 	// ------------- OBJECTS ORIENTED NODES -------------
 	public static class FieldNode extends DecNode {
@@ -252,9 +246,15 @@ public class AST {
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
 
+	public static class ClassTypeNode extends TypeNode {
+		@Override
+		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
+	}
 
-	public static class ClassNode extends TypeNode {
+	public static class ClassNode extends DecNode {
 		final String id;
+		STentry entry;
+		int nl;
 		final List<FieldNode> fieldList;
 		final List<MethodNode> methodList;
 		ClassNode(String i, List<FieldNode> fl, List<MethodNode> ml) {
@@ -266,10 +266,11 @@ public class AST {
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
 
-
-	public static class ClassCallNode extends TypeNode {
+	public static class ClassCallNode extends Node {
 		final String id;
 		final List<Node> arglist;
+		STentry entry;
+		int nl;
 		ClassCallNode(String i, List<Node> a) {
 			id = i;
 			arglist = Collections.unmodifiableList(a);
@@ -279,9 +280,11 @@ public class AST {
 	}
 
 
-	public static class NewNode extends TypeNode {
+	public static class NewNode extends Node {
 		final String id;
 		final List<Node> arglist;
+		STentry entry;
+		int nl;
 		NewNode(String i, List<Node> a) {
 			id = i;
 			arglist = Collections.unmodifiableList(a);
@@ -291,7 +294,7 @@ public class AST {
 	}
 
 
-	public static class EmptyNode extends TypeNode {
+	public static class EmptyNode extends Node {
 		@Override
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
