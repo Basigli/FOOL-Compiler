@@ -105,6 +105,8 @@ Operatori "<=", ">=", "||", "&&", "/", "-" e "!":
      - Implementare layout della dispatch table nell'Heap
      - Implementare layout AR nel caso dei metodi
 
+Abbiamo usato classID
+
 
 2. OO Enriched AST
      - Dichiarazioni: ClassNode, FieldNode(come ParNode), MethodNode(come FunNode)

@@ -58,6 +58,13 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 	}
 
 	@Override
+	public Node visitPrint(PrintContext c) {
+		if (print) printVarAndProdName(c);
+		return new PrintNode(visit(c.exp()));
+	}
+
+	// ------------- OPERATORS CONTEXTS -------------
+	@Override
 	public Node visitTimes(TimesContext c) {
 		if (print) printVarAndProdName(c);
 		Node n = new TimesNode(visit(c.exp(0)), visit(c.exp(1)));
@@ -137,6 +144,7 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 		return n;
 	}
 
+	// ------------- DECS CONTEXTS -------------
 	@Override
 	public Node visitVardec(VardecContext c) {
 		if (print) printVarAndProdName(c);
@@ -167,6 +175,9 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
         return n;
 	}
 
+
+
+	// ------------- TYPE CONTEXTS -------------
 	@Override
 	public Node visitIntType(IntTypeContext c) {
 		if (print) printVarAndProdName(c);
@@ -179,6 +190,13 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 		return new BoolTypeNode();
 	}
 
+	@Override
+	public Node visitClassType(ClassTypeContext c) {
+		if (print) printVarAndProdName(c);
+		return new ClassTypeNode();
+	}
+
+	// ------------- VALUES CONTEXTS -------------
 	@Override
 	public Node visitInteger(IntegerContext c) {
 		if (print) printVarAndProdName(c);
@@ -198,23 +216,7 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 		return new BoolNode(false);
 	}
 
-	@Override
-	public Node visitIf(IfContext c) {
-		if (print) printVarAndProdName(c);
-		Node ifNode = visit(c.exp(0));
-		Node thenNode = visit(c.exp(1));
-		Node elseNode = visit(c.exp(2));
-		Node n = new IfNode(ifNode, thenNode, elseNode);
-		n.setLine(c.IF().getSymbol().getLine());			
-        return n;		
-	}
-
-	@Override
-	public Node visitPrint(PrintContext c) {
-		if (print) printVarAndProdName(c);
-		return new PrintNode(visit(c.exp()));
-	}
-
+	// ------------- IF/PAR/CALL CONTEXTS -------------
 	@Override
 	public Node visitPars(ParsContext c) {
 		if (print) printVarAndProdName(c);
@@ -230,6 +232,17 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 	}
 
 	@Override
+	public Node visitIf(IfContext c) {
+		if (print) printVarAndProdName(c);
+		Node ifNode = visit(c.exp(0));
+		Node thenNode = visit(c.exp(1));
+		Node elseNode = visit(c.exp(2));
+		Node n = new IfNode(ifNode, thenNode, elseNode);
+		n.setLine(c.IF().getSymbol().getLine());			
+        return n;		
+	}
+
+	@Override
 	public Node visitCall(CallContext c) {
 		if (print) printVarAndProdName(c);		
 		List<Node> arglist = new ArrayList<>();
@@ -238,4 +251,53 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 		n.setLine(c.ID().getSymbol().getLine());
 		return n;
 	}
+
+	// ------------- OO CONTEXTS -------------
+	@Override
+	public Node visitEmpty(EmptyContext c) {
+		if (print) printVarAndProdName(c);
+		return new EmptyNode();
+	}
+
+	@Override
+	public Node visitNew(NewContext c) {
+		if (print) printVarAndProdName(c);
+		List<Node> arglist = new ArrayList<>();
+		for (ExpContext arg : c.exp()) arglist.add(visit(arg));
+		Node n = new NewNode(c.ID().get(0).getText(), arglist);
+		n.setLine(c.NEW().getSymbol().getLine());
+		return n;
+	}
+
+
+	@Override
+	public Node visitClassCall(ClassCallContext c) {
+		if (print) printVarAndProdName(c);
+		List<Node> arglist = new ArrayList<>();
+		for (ExpContext arg : c.exp()) arglist.add(visit(arg));
+		Node n = new ClassCallNode(c.ID().get(0).getText(), arglist);
+		n.setLine(c.ID().get(0).getSymbol().getLine());
+		return n;
+	}
+
+	@Override
+	public Node visitClassdec(ClassdecContext c) {
+		if (print) printVarAndProdName(c);
+		List<FieldNode> fieldList = new ArrayList<>();
+		for (int i = 1; i < c.ID().size(); i++) {
+			FieldNode f = new FieldNode(c.ID(i).getText(), (TypeNode) visit(c.type(i)));
+			f.setLine(c.ID(i).getSymbol().getLine());
+			fieldList.add(f);
+		}
+
+		List<MethodNode> methodList = new ArrayList<>();
+		for (DecContext dec : c.dec()) methodList.add((MethodNode) visit(dec));
+		Node n = null;
+		if (c.ID().size() > 0) { // non-incomplete ST
+			n = new ClassNode(c.ID(0).getText(), fieldList, methodList);
+			n.setLine(c.CLASS().getSymbol().getLine());
+		}
+		return n;
+	}
+
 }
