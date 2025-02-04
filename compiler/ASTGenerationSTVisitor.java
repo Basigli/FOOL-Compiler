@@ -165,6 +165,7 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 			p.setLine(c.ID(i).getSymbol().getLine());
 			parList.add(p);
 		}
+
 		List<DecNode> decList = new ArrayList<>();
 		for (DecContext dec : c.dec()) decList.add((DecNode) visit(dec));
 		Node n = null;
@@ -174,7 +175,6 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 		}
         return n;
 	}
-
 
 
 	// ------------- TYPE CONTEXTS -------------
@@ -190,11 +190,11 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 		return new BoolTypeNode();
 	}
 
-	@Override
-	public Node visitClassType(ClassTypeContext c) {
-		if (print) printVarAndProdName(c);
-		return new ClassTypeNode();
-	}
+//	@Override
+//	public Node visitClassType(ClassTypeContext c) {
+//		if (print) printVarAndProdName(c);
+//		return new ClassTypeNode(c.ID().getText());
+//	}
 
 	// ------------- VALUES CONTEXTS -------------
 	@Override
@@ -292,6 +292,7 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 
 		List<MethodNode> methodList = new ArrayList<>();
 		for (DecContext dec : c.dec()) methodList.add((MethodNode) visit(dec));
+
 		Node n = null;
 		if (c.ID().size() > 0) { // non-incomplete ST
 			n = new ClassNode(c.ID(0).getText(), fieldList, methodList);
@@ -299,5 +300,4 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 		}
 		return n;
 	}
-
 }

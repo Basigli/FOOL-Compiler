@@ -247,6 +247,14 @@ public class AST {
 	}
 
 	public static class ClassTypeNode extends TypeNode {
+		final String id;
+		final List<TypeNode> allFields;
+		final List<ArrowTypeNode> allMethods;
+		ClassTypeNode(String i, List<TypeNode> af, List<ArrowTypeNode> am) {
+			id = i;
+			allFields = af;
+			allMethods = am;
+		}
 		@Override
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
