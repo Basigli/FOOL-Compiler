@@ -232,6 +232,7 @@ public class AST {
 	public static class MethodNode extends DecNode {
 		final String id;
 		final TypeNode retType;
+		int offset;
 		final List<ParNode> parlist;
 		final List<DecNode> declist;
 		final Node exp;

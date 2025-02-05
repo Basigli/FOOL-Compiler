@@ -244,8 +244,7 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 		Map<String, STentry> hm = symTable.get(0);
 
 		// Create a new ClassTypeNode with empty lists for fields and methods
-		//ClassTypeNode classType = new ClassTypeNode(n.id, new ArrayList<>(), new ArrayList<>());
-		RefTypeNode classType = new RefTypeNode(n.id);
+		ClassTypeNode classType = new ClassTypeNode(n.id, new ArrayList<>(), new ArrayList<>());
 
 		// Create a new STentry for the class
 		STentry entry = new STentry(0, classType, decOffset--);
@@ -260,19 +259,41 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 		Map<String, STentry> vtable = new HashMap<>();
 		classTable.put(n.id, vtable);
 
-		// Visit fields and methods
+		//creare una nuova hashmap per la symTable
+		nestingLevel++;
+		symTable.add(vtable);
+		int prevNLDecOffset=decOffset; // stores counter for offset of declarations at previous nesting level
+		decOffset=-2;
+
+		// Visit fields
 		for (FieldNode field : n.fieldList) {
 			visit(field);
-			vtable.put(field.id, new STentry(nestingLevel, field.getType(), decOffset--));
+			STentry fieldEntry = new STentry(nestingLevel, field.getType(), decOffset--);
+			if (vtable.put(field.id, fieldEntry) != null) {
+				System.out.println("Field id " + field.id + " at line " + n.getLine() + " already declared");
+				stErrors++;
+			}
+			classType.allFields.add(-fieldEntry.offset - 1, field.getType());
 		}
 
+		// VISIT METHODs
 		for (MethodNode method : n.methodList) {
 			visit(method);
+
 			List<TypeNode> parTypes = new ArrayList<>();
 			for (ParNode par : method.parlist) parTypes.add(par.getType());
-			vtable.put(method.id, new STentry(nestingLevel, new ArrowTypeNode(parTypes, method.retType), decOffset--));
+
+			STentry methodEntry = new STentry(nestingLevel, new ArrowTypeNode(parTypes, method.retType), decOffset--);
+			if (vtable.put(method.id, methodEntry) != null) {
+				System.out.println("Method id " + method.id + " at line " + n.getLine() + " already declared");
+				stErrors++;
+			}
+			method.offset = methodEntry.offset;
+			classType.allMethods.add(method.offset, new ArrowTypeNode(parTypes, method.retType));
 		}
 
+		symTable.remove(nestingLevel--);
+		decOffset=prevNLDecOffset;
 		return null;
 	}
 
