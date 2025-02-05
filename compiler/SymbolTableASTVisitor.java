@@ -237,10 +237,67 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 	}
 
 	// ------------- OO NODES -------------
+
 	@Override
 	public Void visitNode(ClassNode n) {
 		if (print) printNode(n);
 		Map<String, STentry> hm = symTable.get(0);
+
+		// Create a new ClassTypeNode with empty lists for fields and methods
+		//ClassTypeNode classType = new ClassTypeNode(n.id, new ArrayList<>(), new ArrayList<>());
+		RefTypeNode classType = new RefTypeNode(n.id);
+
+		// Create a new STentry for the class
+		STentry entry = new STentry(0, classType, decOffset--);
+
+		// Insert the class ID into the symbol table
+		if (hm.put(n.id, entry) != null) {
+			System.out.println("Class id " + n.id + " at line " + n.getLine() + " already declared");
+			stErrors++;
+		}
+
+		// Create a new hashmap for the class members
+		Map<String, STentry> vtable = new HashMap<>();
+		classTable.put(n.id, vtable);
+
+		// Visit fields and methods
+		for (FieldNode field : n.fieldList) {
+			visit(field);
+			vtable.put(field.id, new STentry(nestingLevel, field.getType(), decOffset--));
+		}
+
+		for (MethodNode method : n.methodList) {
+			visit(method);
+			List<TypeNode> parTypes = new ArrayList<>();
+			for (ParNode par : method.parlist) parTypes.add(par.getType());
+			vtable.put(method.id, new STentry(nestingLevel, new ArrowTypeNode(parTypes, method.retType), decOffset--));
+		}
+
+		return null;
+	}
+
+	@Override
+	public Void visitNode(ClassCallNode n) {
+		if (print) printNode(n);
+		Map<String, STentry> vtable = classTable.get(n.id);
+		if (vtable == null) {
+			System.out.println("Class id " + n.id + " at line " + n.getLine() + " not declared");
+			stErrors++;
+		} else {
+			n.entry = vtable.get(n.id);
+			n.nl = nestingLevel;
+		}
+		for (Node arg : n.arglist) visit(arg);
+		return null;
+	}
+
+	/*
+	@Override
+	public Void visitNode(ClassNode n) {
+		if (print) printNode(n);
+		Map<String, STentry> hm = symTable.get(0);
+
+		// Map<String, Map<String,STentry>> classTable = new HashMap<>();
 
 		List<TypeNode> fieldTypes = new ArrayList<>();
 		for (FieldNode field : n.fieldList) fieldTypes.add(field.getType());
@@ -248,7 +305,7 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 		List<ArrowTypeNode> methodTypes = new ArrayList<>();
 		for (MethodNode method : n.methodList) fieldTypes.add(method.getType());
 
-		STentry entry = new STentry(0, new ClassTypeNode(n.id, fieldTypes, methodTypes),decOffset--);
+		STentry entry = new STentry(0, new ClassTypeNode(n.id, fieldTypes, methodTypes), decOffset--);
 
 		//inserimento di ID nella symtable
 		if (hm.put(n.id, entry) != null) {
@@ -343,4 +400,5 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 		for (Node arg : n.arglist) visit(arg);
 		return null;
 	}
+*/
 }
