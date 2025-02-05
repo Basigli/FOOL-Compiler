@@ -17,8 +17,12 @@ progbody : LET dec+ IN exp SEMIC  #letInProg
 dec : VAR ID COLON type ASS exp SEMIC  #vardec
     | FUN ID COLON type LPAR (ID COLON type (COMMA ID COLON type)* )? RPAR
         	(LET dec+ IN)? exp SEMIC   #fundec
+    | CLASS ID LPAR (ID COLON type (COMMA ID COLON type)* )? RPAR CLPAR
+        (FUN ID COLON type LPAR (ID COLON type (COMMA ID COLON type)* )? RPAR
+        	(LET dec+ IN)? exp SEMIC)*  // also zero methods
+        CRPAR #classdec
     ;
-           
+
 exp     : exp TIMES exp #times
         | exp PLUS  exp #plus
         | exp EQ  exp   #eq 
@@ -37,10 +41,14 @@ exp     : exp TIMES exp #times
 	    | exp AND exp #and
 	    | exp DIVISION exp #division
 	    | exp MINUS exp #minus
+	    | ID POINT ID LPAR (exp (COMMA exp)* )? RPAR #classCall
+	    | NEW ID LPAR (ID ASS exp (COMMA ID ASS exp)* )? RPAR #new
+	    | NULL #empty
         ; 
              
 type    : INT #intType
         | BOOL #boolType
+        | ID #classType
  	    ;  
  	  		  
 /*------------------------------------------------------------------
@@ -77,17 +85,17 @@ NOT     : '!';
 OR      : '||';
 AND      : '&&';
 DIVISION :'/';
+CLASS    :'class';
+POINT    :'.';
+NEW      :'new';
+NULL     :'null';
 
-
-NUM     : '0' | ('1'..'9')('0'..'9')* ; 
-
+NUM     : '0' | ('1'..'9')('0'..'9')* ;
 ID  	: ('a'..'z'|'A'..'Z')('a'..'z' | 'A'..'Z' | '0'..'9')* ;
-
+//CLASSID  	: ('a'..'z'|'A'..'Z')('a'..'z' | 'A'..'Z' | '0'..'9')* ;
 
 WHITESP  : ( '\t' | ' ' | '\r' | '\n' )+    -> channel(HIDDEN) ;
-
 COMMENT : '/*' .*? '*/' -> channel(HIDDEN) ;
- 
 ERR   	 : . { System.out.println("Invalid char "+getText()+" at line "+getLine()); lexicalErrors++; } -> channel(HIDDEN); 
 
 
