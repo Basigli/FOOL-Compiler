@@ -265,10 +265,13 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 		int prevNLDecOffset=decOffset; // stores counter for offset of declarations at previous nesting level
 		decOffset=-2;
 
+		int fieldOffset = -1;
+		int methodOffset = 0;
+
 		// Visit fields
 		for (FieldNode field : n.fieldList) {
 			visit(field);
-			STentry fieldEntry = new STentry(nestingLevel, field.getType(), decOffset--);
+			STentry fieldEntry = new STentry(nestingLevel, field.getType(), fieldOffset--);
 			if (vtable.put(field.id, fieldEntry) != null) {
 				System.out.println("Field id " + field.id + " at line " + n.getLine() + " already declared");
 				stErrors++;
@@ -288,7 +291,7 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 				System.out.println("Method id " + method.id + " at line " + n.getLine() + " already declared");
 				stErrors++;
 			}
-			method.offset = methodEntry.offset;
+			method.offset = methodOffset++;
 			classType.allMethods.add(method.offset, new ArrowTypeNode(parTypes, method.retType));
 		}
 
