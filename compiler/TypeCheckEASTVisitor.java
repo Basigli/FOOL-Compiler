@@ -246,6 +246,7 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 		return ckvisit(entry.type); 
 	}
 
+	/*  ----- OO EXTENSION -----  */
 	@Override
 	public TypeNode visitNode(MethodNode n) throws TypeException {
 		if (print) printNode(n,n.id);
@@ -261,7 +262,31 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 		return null;
 	}
 
+	@Override
+	public TypeNode visitNode(ClassNode n) throws TypeException {
+		if (print) printNode(n,n.id);
+		for (Node dec : n.methodList)
+			try {
+				visit(dec);
+			} catch (IncomplException e) {
+			} catch (TypeException e) {
+				System.out.println("Type checking error in a declaration: " + e.text);
+			}
+		return null;
+	}
 
-
-
+	@Override
+	public TypeNode visitNode(ClassCallNode n) throws TypeException {
+		if (print) printNode(n,n.id);
+		TypeNode t = visit(n.entry);
+		if ( !(t instanceof ClassTypeNode) )
+			throw new TypeException("Invocation of a non-class "+n.id,n.getLine());
+		ClassTypeNode ct = (ClassTypeNode) t;
+		if ( !(ct.allMethods.size() == n.arglist.size()) )
+			throw new TypeException("Wrong number of parameters in the invocation of "+n.id,n.getLine());
+		for (int i = 0; i < n.arglist.size(); i++)
+			if ( !(isSubtype(visit(n.arglist.get(i)),ct.allMethods.get(i))) )
+				throw new TypeException("Wrong type for "+(i+1)+"-th parameter in the invocation of "+n.id,n.getLine());
+		return null;
+	}
 }
