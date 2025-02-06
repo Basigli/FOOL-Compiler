@@ -290,6 +290,7 @@ public class AST {
 		final String id2;
 		final List<Node> arglist;
 		STentry entry;
+		STentry methodEntry;
 		int nl;
 		ClassCallNode(String id1, String id2, List<Node> a) {
 			this.id1 = id2;
