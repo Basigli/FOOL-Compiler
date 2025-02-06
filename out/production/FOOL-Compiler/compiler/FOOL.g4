@@ -42,7 +42,7 @@ exp     : exp TIMES exp #times
 	    | exp DIVISION exp #division
 	    | exp MINUS exp #minus
 	    | ID POINT ID LPAR (exp (COMMA exp)* )? RPAR #classCall
-	    | NEW ID LPAR (ID ASS exp (COMMA ID ASS exp)* )? RPAR #new
+	    | NEW ID LPAR (exp (COMMA exp)* )? RPAR #new
 	    | NULL #empty
         ; 
              
