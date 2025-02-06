@@ -1,0 +1,55 @@
+let
+
+  class List (f:int, r:List) {
+    fun first:int() f;
+    fun rest:List() r; 
+  }
+  
+  fun printList:List (l:List) 
+      let  
+        fun makeList:List (l:List, i:int) new List (i,l);
+      in 
+         if (l == null) 
+           then {null}
+           else {makeList(printList(l.rest()),print(l.first()))};                 
+  
+  fun append:List (l1:List, l2:List)
+      if (l1 == null)
+        then {l2}
+        else {new List(l1.first(), append(l1.rest(),l2))} ;  
+    
+  /* filtra la lista "l" mantenendo solo gli elementi */
+  /* che sono: <= a "pivot", se "before" è true       */
+  /*            > a "pivot", se "before" è false      */
+  fun filter:List (l:List, pivot:int, before:bool) 
+      let
+        fun accept:bool (cond:bool)
+            if (before) then {cond} else {!(cond)};
+      in        
+        if (l == null) 
+          then {null}
+          else {if ( accept(l.first()<=pivot) )
+                  then { new List( l.first(), filter(l.rest(),pivot,before) ) }
+                  else { filter(l.rest(),pivot,before) }
+               };    
+  
+  fun quicksort:List (l:List)    
+      let
+        var pivot:int = if (l==null) then {0} else {l.first()}; 
+      in          
+        if (l == null) 
+           then {null}
+           else {append( 
+                   quicksort( filter(l.rest(),pivot,true) ),
+                   new List(  pivot,  quicksort( filter(l.rest(),pivot,false) )  )                       
+                 )};
+                                                        
+  var l:List = new List (2, 
+                    new List(1,
+                        new List(4,
+                            new List (3, 
+                                new List(2,
+                                    new List(5,null))))));
+  
+in printList(quicksort(l));
+
