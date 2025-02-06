@@ -293,7 +293,7 @@ public class AST {
 		STentry methodEntry;
 		int nl;
 		ClassCallNode(String id1, String id2, List<Node> a) {
-			this.id1 = id2;
+			this.id1 = id1;
 			this.id2 = id2;
 			arglist = Collections.unmodifiableList(a);
 		}
