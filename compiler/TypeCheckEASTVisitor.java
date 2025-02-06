@@ -292,4 +292,37 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 				throw new TypeException("Wrong type for "+(i+1)+"-th parameter in the invocation of "+n.id1,n.getLine());
 		return null;
 	}
+
+
+	public TypeNode visitNode(NewNode n) throws TypeException {
+		if (print) printNode(n, n.id);
+
+		// Retrieve the ClassTypeNode from the entry field
+		if (!(n.entry.type instanceof ClassTypeNode)) {
+			throw new TypeException("New expression with non-class type " + n.id, n.getLine());
+		}
+
+		// Check if the number of arguments matches the number of fields
+		ClassTypeNode classType = (ClassTypeNode) n.entry.type;
+		if (n.arglist.size() != classType.allFields.size()) {
+			throw new TypeException("Wrong number of parameters in the instantiation of " + n.id, n.getLine());
+		}
+
+		// Verify that each argument's type is a subtype of the corresponding field's type
+		for (int i = 0; i < n.arglist.size(); i++) {
+			TypeNode argType = visit(n.arglist.get(i));
+			TypeNode fieldType = classType.allFields.get(i);
+			if (!isSubtype(argType, fieldType)) {
+				throw new TypeException("Wrong type for " + (i + 1) + "-th parameter in the instantiation of " + n.id, n.getLine());
+			}
+		}
+
+		return new RefTypeNode(n.id);
+	}
+
+	@Override
+	public TypeNode visitNode(EmptyNode n){
+		if (print) printNode(n);
+		return new EmptyTypeNode();
+	}
 }
