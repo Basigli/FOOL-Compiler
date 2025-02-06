@@ -325,7 +325,6 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 		// System.out.println(n.id1 + " " + n.id2);
 		STentry ref = stLookup(n.id1);
 		// System.out.println(ref.type);
-		// STentry ref = symTable.get(nestingLevel).get(n.id1);
 		if (ref.type == null) {
 			System.out.println("Class of id1 " + n.id1 + " at line " + n.getLine() + " not declared");
 			stErrors++;
@@ -344,7 +343,7 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 		}
 
 		STentry methodEntry = vtable.get(n.id2);
-		System.out.println(vtable);
+		// System.out.println(vtable);
 		if (methodEntry == null) {
 			System.out.println("Method id " + n.id1 + " at line " + n.getLine() + " not declared in class " + refType.id);
 			stErrors++;

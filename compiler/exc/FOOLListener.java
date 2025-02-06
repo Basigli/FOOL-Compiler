@@ -78,6 +78,26 @@ public interface FOOLListener extends ParseTreeListener {
 	 */
 	void exitClassdec(FOOLParser.ClassdecContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link FOOLParser#fieldDec}.
+	 * @param ctx the parse tree
+	 */
+	void enterFieldDec(FOOLParser.FieldDecContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FOOLParser#fieldDec}.
+	 * @param ctx the parse tree
+	 */
+	void exitFieldDec(FOOLParser.FieldDecContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FOOLParser#methodDec}.
+	 * @param ctx the parse tree
+	 */
+	void enterMethodDec(FOOLParser.MethodDecContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FOOLParser#methodDec}.
+	 * @param ctx the parse tree
+	 */
+	void exitMethodDec(FOOLParser.MethodDecContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code new}
 	 * labeled alternative in {@link FOOLParser#exp}.
 	 * @param ctx the parse tree

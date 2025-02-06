@@ -276,30 +276,58 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 		if (print) printVarAndProdName(c);
 		List<Node> arglist = new ArrayList<>();
 		for (ExpContext arg : c.exp()) arglist.add(visit(arg));
-		System.out.println(c.ID().toString());
+		// System.out.println(c.ID().toString());
 		Node n = new ClassCallNode(c.ID().get(0).getText(), c.ID().get(1).getText(), arglist);
 		n.setLine(c.ID().get(1).getSymbol().getLine());
 		return n;
 	}
 
-	@Override
 	public Node visitClassdec(ClassdecContext c) {
 		if (print) printVarAndProdName(c);
+
 		List<FieldNode> fieldList = new ArrayList<>();
-		for (int i = 1; i < c.ID().size(); i++) {
-			FieldNode f = new FieldNode(c.ID(i).getText(), (TypeNode) visit(c.type(i)));
-			f.setLine(c.ID(i).getSymbol().getLine());
+		for (FieldDecContext field : c.fieldDec()) {
+			FieldNode f = new FieldNode(field.ID().getText(), (TypeNode) visit(field.type()));
+			f.setLine(field.ID().getSymbol().getLine());
 			fieldList.add(f);
 		}
 
 		List<MethodNode> methodList = new ArrayList<>();
-		for (DecContext dec : c.dec()) methodList.add((MethodNode) visit(dec));
+		for (MethodDecContext method : c.methodDec()) {
+			methodList.add((MethodNode) visit(method));
+		}
 
 		Node n = null;
-		if (c.ID().size() > 0) { // non-incomplete ST
-			n = new ClassNode(c.ID(0).getText(), fieldList, methodList);
+		if (c.ID() != null) { // non-incomplete ST
+			n = new ClassNode(c.ID().getText(), fieldList, methodList);
 			n.setLine(c.CLASS().getSymbol().getLine());
 		}
+
 		return n;
 	}
+
+//	@Override
+//	public Node visitClassdec(ClassdecContext c) {
+//		if (print) printVarAndProdName(c);
+//
+//		System.out.print(" IDs: ");
+//		System.out.println(c.ID());
+//
+//		List<FieldNode> fieldList = new ArrayList<>();
+//		for (int i = 1; i < c.ID().size(); i++) {
+//			FieldNode f = new FieldNode(c.ID(i).getText(), (TypeNode) visit(c.type(i)));
+//			f.setLine(c.ID(i).getSymbol().getLine());
+//			fieldList.add(f);
+//		}
+//
+//		List<MethodNode> methodList = new ArrayList<>();
+//		for (DecContext dec : c.dec()) methodList.add((MethodNode) visit(dec));
+//
+//		Node n = null;
+//		if (!c.ID().isEmpty()) { // non-incomplete ST
+//			n = new ClassNode(c.ID(0).getText(), fieldList, methodList);
+//			n.setLine(c.CLASS().getSymbol().getLine());
+//		}
+//		return n;
+//	}
 }

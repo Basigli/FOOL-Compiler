@@ -17,11 +17,16 @@ progbody : LET dec+ IN exp SEMIC  #letInProg
 dec : VAR ID COLON type ASS exp SEMIC  #vardec
     | FUN ID COLON type LPAR (ID COLON type (COMMA ID COLON type)* )? RPAR
         	(LET dec+ IN)? exp SEMIC   #fundec
-    | CLASS ID LPAR (ID COLON type (COMMA ID COLON type)* )? RPAR CLPAR
-        (FUN ID COLON type LPAR (ID COLON type (COMMA ID COLON type)* )? RPAR
-        	(LET dec+ IN)? exp SEMIC)*  // also zero methods
+    | CLASS ID LPAR (fieldDec (COMMA fieldDec)* )? RPAR CLPAR
+        (methodDec)*  // zero or more methods
         CRPAR #classdec
     ;
+
+fieldDec : ID COLON type;
+
+methodDec : FUN ID COLON type LPAR (ID COLON type (COMMA ID COLON type)* )? RPAR
+        	(LET dec+ IN)? exp SEMIC;
+
 
 exp     : exp TIMES exp #times
         | exp PLUS  exp #plus
