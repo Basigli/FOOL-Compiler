@@ -22,7 +22,7 @@ dec : VAR ID COLON type ASS exp SEMIC  #vardec
         CRPAR #classdec
     ;
 
-fieldDec : ID COLON type;
+fieldDec : ID COLON type ;
 
 methodDec : FUN ID COLON type LPAR (ID COLON type (COMMA ID COLON type)* )? RPAR
         	(LET dec+ IN)? exp SEMIC;

@@ -257,7 +257,6 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 	}
 
 	// ------------- OO NODES -------------
-
 	@Override
 	public Void visitNode(ClassNode n) {
 		if (print) printNode(n);
@@ -285,7 +284,7 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 		int prevNLDecOffset=decOffset; // stores counter for offset of declarations at previous nesting level
 		decOffset=-2;
 
-		int fieldOffset = -1;
+		int fieldOffset = 0;
 		int methodOffset = 0;
 
 		// Visit fields
@@ -295,11 +294,13 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 				System.out.println("Field id " + field.id + " at line " + n.getLine() + " already declared");
 				stErrors++;
 			}
-			classType.allFields.add(-fieldEntry.offset - 1, field.getType());
+			// classType.allFields.add(-fieldEntry.offset - 1, field.getType());
+			classType.allFields.add(field.getType());
 		}
 
 		// VISIT METHODs
-		if(!n.methodList.isEmpty()) for (MethodNode method : n.methodList) {
+		if(!n.methodList.isEmpty())
+			for (MethodNode method : n.methodList) {
 			List<TypeNode> parTypes = new ArrayList<>();
 			for (ParNode par : method.parlist) parTypes.add(par.getType());
 

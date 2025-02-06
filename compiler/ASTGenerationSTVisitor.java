@@ -282,15 +282,41 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 		return n;
 	}
 
+	public Node visitFieldDec(FieldDecContext c) {
+		if (print) printVarAndProdName(c);
+		Node n = new FieldNode(c.ID().getText(), (TypeNode) visit(c.type()));
+		n.setLine(c.ID().getSymbol().getLine());
+		return n;
+	}
+
+	public Node visitMethodDec(MethodDecContext c) {
+		if (print) printVarAndProdName(c);
+		List<ParNode> parList = new ArrayList<>();
+		for (int i = 1; i < c.ID().size(); i++) {
+			ParNode p = new ParNode(c.ID(i).getText(), (TypeNode) visit(c.type(i)));
+			p.setLine(c.ID(i).getSymbol().getLine());
+			parList.add(p);
+		}
+
+		List<DecNode> decList = new ArrayList<>();
+		for (DecContext dec : c.dec()) decList.add((DecNode) visit(dec));
+		Node n = null;
+		if (!c.ID().isEmpty()) { // non-incomplete ST
+			n = new MethodNode(c.ID(0).getText(), (TypeNode) visit(c.type(0)), parList, decList, visit(c.exp()));
+			n.setLine(c.ID(0).getSymbol().getLine());
+		}
+		return n;
+	}
+
 	public Node visitClassdec(ClassdecContext c) {
 		if (print) printVarAndProdName(c);
 
 		List<FieldNode> fieldList = new ArrayList<>();
 		for (FieldDecContext field : c.fieldDec()) {
-			FieldNode f = new FieldNode(field.ID().getText(), (TypeNode) visit(field.type()));
-			f.setLine(field.ID().getSymbol().getLine());
-			fieldList.add(f);
+			fieldList.add((FieldNode) visit(field));
 		}
+
+		System.out.println("FieldList: " + fieldList);
 
 		List<MethodNode> methodList = new ArrayList<>();
 		for (MethodDecContext method : c.methodDec()) {
