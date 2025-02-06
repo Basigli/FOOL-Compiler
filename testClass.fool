@@ -1,0 +1,7 @@
+let
+  class List (f:int, r:List) {
+    let
+      var a:int=10
+    in
+  } 
+in
