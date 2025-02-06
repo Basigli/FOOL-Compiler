@@ -286,12 +286,14 @@ public class AST {
 	}
 
 	public static class ClassCallNode extends Node {
-		final String id;
+		final String id1;
+		final String id2;
 		final List<Node> arglist;
 		STentry entry;
 		int nl;
-		ClassCallNode(String i, List<Node> a) {
-			id = i;
+		ClassCallNode(String id1, String id2, List<Node> a) {
+			this.id1 = id2;
+			this.id2 = id2;
 			arglist = Collections.unmodifiableList(a);
 		}
 		@Override

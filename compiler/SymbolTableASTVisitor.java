@@ -301,12 +301,12 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 	@Override
 	public Void visitNode(ClassCallNode n) {
 		if (print) printNode(n);
-		Map<String, STentry> vtable = classTable.get(n.id);
+		Map<String, STentry> vtable = classTable.get(n.id1);
 		if (vtable == null) {
-			System.out.println("Class id " + n.id + " at line " + n.getLine() + " not declared");
+			System.out.println("Class id " + n.id1 + " at line " + n.getLine() + " not declared");
 			stErrors++;
 		} else {
-			n.entry = vtable.get(n.id);
+			n.entry = vtable.get(n.id1);
 			n.nl = nestingLevel;
 		}
 		for (Node arg : n.arglist) visit(arg);
