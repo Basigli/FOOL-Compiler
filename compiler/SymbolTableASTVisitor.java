@@ -96,11 +96,16 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 			System.out.println("Var id " + n.id + " at line "+ n.getLine() +" already declared");
 			stErrors++;
 		}
-
-		if(n.getType() instanceof ClassTypeNode){
+		if (n.getType() instanceof  IntTypeNode) {
+			System.out.println("IntTypeNode");
+		}
+		if (n.getType() instanceof  BoolTypeNode) {
+			System.out.println("BoolTypeNode");
+		}
+		if (n.getType() instanceof ClassTypeNode){
 			ClassTypeNode classType = (ClassTypeNode) n.getType();
 			Map<String, STentry> ctable = classTable.get(classType.id);
-			if(ctable == null){
+			if (ctable == null){
 				System.out.println("Class id " + n.id + " at line "+ n.getLine() +" not declared");
 				stErrors++;
 			}
@@ -319,7 +324,7 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 		if (print) printNode(n);
 
 		STentry ref = symTable.get(nestingLevel).get(n.id1);
-		if (ref == null) {
+		if (ref.type == null) {
 			System.out.println("Class id1 " + n.id1 + " at line " + n.getLine() + " not declared");
 			stErrors++;
 			return null;
