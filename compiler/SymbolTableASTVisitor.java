@@ -313,6 +313,31 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 		return null;
 	}
 
+	@Override
+	public Void visitNode(NewNode n) {
+		if (print) printNode(n);
+
+		// Retrieve the STentry of the class ID from the class table
+		Map<String, STentry> classEntries = classTable.get(n.id);
+		if (classEntries == null) {
+			System.out.println("Class id " + n.id + " at line " + n.getLine() + " not declared");
+			stErrors++;
+			return null;
+		}
+
+		// Retrieve the STentry from level 0 of the symbol table
+		STentry classEntry = symTable.get(0).get(n.id);
+		if (classEntry == null) {
+			System.out.println("Class id " + n.id + " at line " + n.getLine() + " not found in symbol table");
+			stErrors++;
+			return null;
+		}
+
+		// Set the entry field of the NewNode to the retrieved STentry
+		n.entry = classEntry;
+
+		return null;
+	}
 	/*
 	@Override
 	public Void visitNode(ClassNode n) {
