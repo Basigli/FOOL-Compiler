@@ -309,6 +309,13 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 			n.entry = vtable.get(n.id1);
 			n.nl = nestingLevel;
 		}
+		STentry methodEntry = vtable.get(n.id2);
+		if (methodEntry == null) {
+			System.out.println("Method id " + n.id2 + " at line " + n.getLine() + " not declared in class " + n.id1);
+			stErrors++;
+			return null;
+		}
+		
 		for (Node arg : n.arglist) visit(arg);
 		return null;
 	}
