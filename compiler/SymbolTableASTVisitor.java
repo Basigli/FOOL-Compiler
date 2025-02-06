@@ -269,8 +269,8 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 		int methodOffset = 0;
 
 		// Visit fields
-		for (FieldNode field : n.fieldList) {
-			visit(field);
+		if(!n.fieldList.isEmpty()) for (FieldNode field : n.fieldList) {
+			System.out.println(field.id + " " + field.toString());
 			STentry fieldEntry = new STentry(nestingLevel, field.getType(), fieldOffset--);
 			if (vtable.put(field.id, fieldEntry) != null) {
 				System.out.println("Field id " + field.id + " at line " + n.getLine() + " already declared");
@@ -280,9 +280,7 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 		}
 
 		// VISIT METHODs
-		for (MethodNode method : n.methodList) {
-			visit(method);
-
+		if(!n.methodList.isEmpty()) for (MethodNode method : n.methodList) {
 			List<TypeNode> parTypes = new ArrayList<>();
 			for (ParNode par : method.parlist) parTypes.add(par.getType());
 

@@ -210,11 +210,21 @@ public class AST {
 	}
 	
 	public static class BoolTypeNode extends TypeNode {
+
+		public String toString() {
+			return "bool";
+		}
+
 		@Override
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
 
 	public static class IntTypeNode extends TypeNode {
+
+		public String toString() {
+			return "int";
+		}
+
 		@Override
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
