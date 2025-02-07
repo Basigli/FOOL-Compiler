@@ -44,8 +44,15 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 	@Override
 	public TypeNode visitNode(FunNode n) throws TypeException {
 		if (print) printNode(n,n.id);
+
+		System.out.println("FUN: " + n.id);
+		System.out.println("RET: " + n.retType);
+		System.out.println("DEC: " + n.declist);
+		System.out.println("EXP: " + n.exp);
+
 		for (Node dec : n.declist)
 			try {
+				System.out.println("DEC: " + dec);
 				visit(dec);
 			} catch (IncomplException e) { 
 			} catch (TypeException e) {
@@ -75,8 +82,13 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 		if (print) printNode(n);
 		if ( !(isSubtype(visit(n.cond), new BoolTypeNode())) )
 			throw new TypeException("Non boolean condition in if",n.getLine());
+
+		System.out.println("THEN: " + n.th);
+		System.out.println("ELSE: " + n.el);
+
 		TypeNode t = visit(n.th);
 		TypeNode e = visit(n.el);
+
 		if (isSubtype(t, e)) return e;
 		if (isSubtype(e, t)) return t;
 		throw new TypeException("Incompatible types in then-else branches",n.getLine());
@@ -166,6 +178,9 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 	@Override
 	public TypeNode visitNode(NotNode n) throws TypeException {
 		if (print) printNode(n);
+
+		System.out.println("EXP: " + n.exp);
+
 		if ( !(isSubtype(visit(n.exp), new BoolTypeNode())))
 			throw new TypeException("Non boolean in not",n.getLine());
 		return new IntTypeNode();
@@ -198,7 +213,11 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 	@Override
 	public TypeNode visitNode(IdNode n) throws TypeException {
 		if (print) printNode(n,n.id);
-		TypeNode t = visit(n.entry); 
+		TypeNode t = visit(n.entry);
+
+		System.out.println("ID: " + n.id);
+		System.out.println("TYPE: " + n.entry.type);
+
 		if (t instanceof ArrowTypeNode)
 			throw new TypeException("Wrong usage of function identifier " + n.id,n.getLine());
 		return t;

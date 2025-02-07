@@ -115,7 +115,9 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 	@Override
 	public Node visitNot(NotContext c) {
 		if (print) printVarAndProdName(c);
+		System.out.println("NOT EXP: " + c.exp().getText());
 		Node n = new NotNode(visit(c.exp()));
+		System.out.println("NOT: " + n.toString());
 		n.setLine(c.NOT().getSymbol().getLine());
 		return n;
 	}
@@ -317,7 +319,7 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 			fieldList.add((FieldNode) visit(field));
 		}
 
-		System.out.println("FieldList: " + fieldList);
+		// System.out.println("FieldList: " + fieldList);
 
 		// print all fiedlist
 		for (FieldNode f : fieldList) {
