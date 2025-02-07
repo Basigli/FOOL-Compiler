@@ -115,6 +115,10 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 
 			RefTypeNode refType = new RefTypeNode(classType.id);
 			hm.put(n.id, new STentry(nestingLevel, refType, decOffset--));
+		}else {
+			ClassTypeNode classType = (ClassTypeNode) n.getType();
+			RefTypeNode refType = new RefTypeNode(classType.id);
+			hm.put(n.id, new STentry(nestingLevel, refType, decOffset--));
 		}
 
 		return null;
@@ -332,8 +336,8 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 			return null;
 		}
 
-		// RefTypeNode refType = new RefTypeNode(ref.type.toString());
-		ClassTypeNode refType = (ClassTypeNode) ref.type;
+		RefTypeNode refType = new RefTypeNode(ref.type.toString());
+		// ClassTypeNode refType = (ClassTypeNode) ref.type;
 		Map<String, STentry> vtable = classTable.get(refType.id);
 		if (vtable == null) {
 			System.out.println("Class of id1 " + n.id1 + " at line " + n.getLine() + " not declared");

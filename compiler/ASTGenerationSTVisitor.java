@@ -196,8 +196,8 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 	@Override
 	public Node visitClassType(ClassTypeContext c) {
 		if (print) printVarAndProdName(c);
-		return new ClassTypeNode(c.ID().getText(), new ArrayList<>(), new ArrayList<>());
-		// return new RefTypeNode(c.ID().getText());
+		 // return new ClassTypeNode(c.ID().getText(), new ArrayList<>(), new ArrayList<>());
+		return new RefTypeNode(c.ID().getText());
 	}
 
 	// ------------- VALUES CONTEXTS -------------
