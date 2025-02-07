@@ -30,7 +30,7 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 				visit(dec);
 			} catch (IncomplException e) { 
 			} catch (TypeException e) {
-				System.out.println("Type checking error in a declaration: " + e.text);
+				System.out.println("ProgLetInNode -> " + "Type checking error in a declaration: " + e.text + dec.toString());
 			}
 		return visit(n.exp);
 	}
@@ -49,7 +49,7 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 				visit(dec);
 			} catch (IncomplException e) { 
 			} catch (TypeException e) {
-				System.out.println("Type checking error in a declaration: " + e.text);
+				System.out.println("FunNode -> " + "Type checking error in a declaration: " + e.text);
 			}
 		if ( !isSubtype(visit(n.exp), ckvisit(n.retType)) )
 			throw new TypeException("Wrong return type for function " + n.id,n.getLine());
@@ -255,7 +255,7 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 				visit(dec);
 			} catch (IncomplException e) {
 			} catch (TypeException e) {
-				System.out.println("Type checking error in a declaration: " + e.text);
+				System.out.println("MethodNode -> " + "Type checking error in a declaration: " + e.text);
 			}
 		if ( !isSubtype(visit(n.exp), ckvisit(n.retType)) )
 			throw new TypeException("Wrong return type for function " + n.id,n.getLine());
@@ -270,7 +270,7 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 				visit(dec);
 			} catch (IncomplException e) {
 			} catch (TypeException e) {
-				System.out.println("Type checking error in a declaration: " + e.text);
+				System.out.println("ClassNode/method -> " + "Type checking error in a declaration: " + e.text);
 			}
 
 		for(Node dec : n.fieldList)
@@ -278,7 +278,7 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 				visit(dec);
 			} catch (IncomplException e) {
 			} catch (TypeException e) {
-				System.out.println("Type checking error in a declaration: " + e.text);
+				System.out.println("ClassNode/field -> " + "Type checking error in a declaration: " + e.text);
 			}
 
 		return null;
