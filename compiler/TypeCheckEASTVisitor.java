@@ -322,9 +322,9 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 
 		// Check if the number of arguments matches the number of fields
 		ClassTypeNode classType = (ClassTypeNode) n.entry.type;
-		System.out.println(classType.id);
-		System.out.println(classType.allFields);
-		System.out.println(classType.allMethods);
+//		System.out.println(classType.id);
+//		System.out.println(classType.allFields);
+//		System.out.println(classType.allMethods);
 
 		if (n.arglist.size() != classType.allFields.size()) {
 			throw new TypeException("Wrong number of parameters in the instantiation of " + n.id, n.getLine());
