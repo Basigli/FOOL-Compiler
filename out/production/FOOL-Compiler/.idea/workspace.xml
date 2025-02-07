@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="323a84bc-aa5e-4433-ad93-19985572358f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/compiler/SymbolTableASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/compiler/SymbolTableASTVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/compiler/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/compiler/Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/SymbolTableASTVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/SymbolTableASTVisitor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOTES.MD" beforeDir="false" afterPath="$PROJECT_DIR$/NOTES.MD" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +29,10 @@
             <RecentBranchesForRepo>
               <option name="branches">
                 <list>
+                  <RecentBranch>
+                    <option name="branchName" value="new-grammar" />
+                    <option name="lastUsedInstant" value="1738869088" />
+                  </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="visualsvm" />
                     <option name="lastUsedInstant" value="1738762293" />
@@ -67,7 +69,7 @@
   &quot;keyToString&quot;: {
     &quot;Application.Test.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;visualsvm&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;new-grammar&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/muham/FOOL-Compiler&quot;,

@@ -272,8 +272,26 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 			} catch (TypeException e) {
 				System.out.println("Type checking error in a declaration: " + e.text);
 			}
+
+		for(Node dec : n.fieldList)
+			try {
+				visit(dec);
+			} catch (IncomplException e) {
+			} catch (TypeException e) {
+				System.out.println("Type checking error in a declaration: " + e.text);
+			}
+
 		return null;
 	}
+
+	@Override
+	public TypeNode visitNode(FieldNode n) throws TypeException {
+		if (print) printNode(n,n.id);
+		if ( !isSubtype(visit(n.getType()), ckvisit(n.getType())) )
+			throw new TypeException("Incompatible value for variable " + n.id,n.getLine());
+		return null;
+	}
+
 
 	@Override
 	public TypeNode visitNode(ClassCallNode n) throws TypeException {

@@ -1,7 +1,9 @@
 # Code Notes  #
-Le classi Lexer e Parser vengono usate per generare l'oggetto ```ParseTree```. Con la classe ```SimpleCalcSTVisitor``` si visita tutto l'albero.
-!!! Il metodo ```visit()``` chiama ```accept()``` che chiama ```visitNode()```
+Le classi Lexer e Parser vengono usate per generare l'oggetto ```ParseTree```. Con la classe ```SimpleCalcSTVisitor``` si visita tutto l'albero. Il metodo ```visit()``` chiama ```accept()``` che chiama ```visitNode()``` solo per invertire il controllo. 
 
+Problems: 
++ RefTypeNode (dove e come?)
++ Controllare Offsets 
 
 ### Class: (Simple)-CalcSTVisitor ###
 Contiene tutti i metodi ```visit```, uno per ogni regola della grammatica, per calcolare delle espressioni tra interi. 

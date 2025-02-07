@@ -2,4 +2,6 @@ let
   class List (f:int) {
     fun first:int () 0;
   }
-in true;
+in
+    var l:List = new List(5,null)
+    ;

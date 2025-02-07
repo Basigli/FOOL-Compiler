@@ -103,6 +103,7 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 		if (n.getType() instanceof  BoolTypeNode) {
 			System.out.println("BoolTypeNode");
 		}
+
 		if (n.getType() instanceof ClassTypeNode){
 			System.out.println("ClassTypeNode");
 			ClassTypeNode classType = (ClassTypeNode) n.getType();
@@ -264,8 +265,6 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 
 		// Create a new ClassTypeNode with empty lists for fields and methods
 		ClassTypeNode classType = new ClassTypeNode(n.id, new ArrayList<>(), new ArrayList<>());
-
-		// Create a new STentry for the class
 		STentry entry = new STentry(0, classType, decOffset--);
 
 		// Insert the class ID into the symbol table
@@ -277,15 +276,15 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 		// Create a new hashmap for the class members
 		Map<String, STentry> vtable = new HashMap<>();
 		classTable.put(n.id, vtable);
+		symTable.add(vtable);
 
 		//creare una nuova hashmap per la symTable
 		nestingLevel++;
-		symTable.add(vtable);
-		int prevNLDecOffset=decOffset; // stores counter for offset of declarations at previous nesting level
-		decOffset=-2;
+		int prevNLDecOffset = decOffset; // stores counter for offset of declarations at previous nesting level
+		decOffset = -2;
 
-		int fieldOffset = 0;
-		int methodOffset = 0;
+		int fieldOffset  = -1;
+		int methodOffset =  0;
 
 		// Visit fields
 		if(!n.fieldList.isEmpty()) for (FieldNode field : n.fieldList) {
@@ -294,8 +293,11 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 				System.out.println("Field id " + field.id + " at line " + n.getLine() + " already declared");
 				stErrors++;
 			}
-			// classType.allFields.add(-fieldEntry.offset - 1, field.getType());
-			classType.allFields.add(field.getType());
+
+			System.out.println("Field type: " + field.type);
+			classType.allFields.add(-fieldEntry.offset - 1, field.type);
+			// fieldOffset--;
+			// classType.allFields.add(field.getType());
 		}
 
 		// VISIT METHODs
@@ -315,7 +317,7 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 		}
 
 		symTable.remove(nestingLevel--);
-		decOffset=prevNLDecOffset;
+		decOffset = prevNLDecOffset;
 		return null;
 	}
 
@@ -323,9 +325,7 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 	public Void visitNode(ClassCallNode n) {
 		if (print) printNode(n);
 
-		// System.out.println(n.id1 + " " + n.id2);
 		STentry ref = stLookup(n.id1);
-		// System.out.println(ref.type);
 		if (ref.type == null) {
 			System.out.println("Class of id1 " + n.id1 + " at line " + n.getLine() + " not declared");
 			stErrors++;
@@ -344,7 +344,6 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 		}
 
 		STentry methodEntry = vtable.get(n.id2);
-		// System.out.println(vtable);
 		if (methodEntry == null) {
 			System.out.println("Method id " + n.id1 + " at line " + n.getLine() + " not declared in class " + refType.id);
 			stErrors++;
@@ -383,6 +382,9 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 
 		// Set the entry field of the NewNode to the retrieved STentry
 		n.entry = classEntry;
+
+		for (Node arg : n.arglist)
+			visit(arg);
 		return null;
 	}
 

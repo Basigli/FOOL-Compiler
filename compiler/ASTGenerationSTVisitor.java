@@ -195,6 +195,7 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 	public Node visitClassType(ClassTypeContext c) {
 		if (print) printVarAndProdName(c);
 		return new ClassTypeNode(c.ID().getText(), new ArrayList<>(), new ArrayList<>());
+		// return new RefTypeNode(c.ID().getText());
 	}
 
 	// ------------- VALUES CONTEXTS -------------
@@ -317,6 +318,12 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 		}
 
 		System.out.println("FieldList: " + fieldList);
+
+		// print all fiedlist
+		for (FieldNode f : fieldList) {
+			System.out.println(f.id + " " + f.type);
+		}
+
 
 		List<MethodNode> methodList = new ArrayList<>();
 		for (MethodDecContext method : c.methodDec()) {
