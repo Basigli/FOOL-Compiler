@@ -2,8 +2,10 @@
 Le classi Lexer e Parser vengono usate per generare l'oggetto ```ParseTree```. Con la classe ```SimpleCalcSTVisitor``` si visita tutto l'albero. Il metodo ```visit()``` chiama ```accept()``` che chiama ```visitNode()``` solo per invertire il controllo. 
 
 Problems: 
-+ RefTypeNode (dove e come?)
-+ Controllare Offsets 
++ Controllare Offsets
++ Aggiungere MethodNode uguale a FunNode (aggiunge in symtable non vtable)
++ Fields invece sembra che vengano messi in entrambe
++ RefTypeNode (non solo nella newnode/varnode, anche come argomento di funzioni)
 
 ### Class: (Simple)-CalcSTVisitor ###
 Contiene tutti i metodi ```visit```, uno per ogni regola della grammatica, per calcolare delle espressioni tra interi. 

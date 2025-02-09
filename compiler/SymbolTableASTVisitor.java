@@ -97,29 +97,30 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 			stErrors++;
 		}
 
-		if (n.getType() instanceof  IntTypeNode) {
-			System.out.println("IntTypeNode");
-		}
-		if (n.getType() instanceof  BoolTypeNode) {
-			System.out.println("BoolTypeNode");
-		}
-
-		if (n.getType() instanceof ClassTypeNode){
-			System.out.println("ClassTypeNode");
-			ClassTypeNode classType = (ClassTypeNode) n.getType();
-			Map<String, STentry> ctable = classTable.get(classType.id);
-			if (ctable == null){
-				System.out.println("Class id " + n.id + " at line "+ n.getLine() +" not declared");
-				stErrors++;
-			}
-
-			RefTypeNode refType = new RefTypeNode(classType.id);
-			hm.put(n.id, new STentry(nestingLevel, refType, decOffset--));
-		}else {
-			ClassTypeNode classType = (ClassTypeNode) n.getType();
-			RefTypeNode refType = new RefTypeNode(classType.id);
-			hm.put(n.id, new STentry(nestingLevel, refType, decOffset--));
-		}
+//		if (n.getType() instanceof  IntTypeNode) {
+//			System.out.println("Var Dec: IntTypeNode");
+//		}
+//
+//		if (n.getType() instanceof  BoolTypeNode) {
+//			System.out.println("Var Dec: BoolTypeNode");
+//		}
+//
+//		if (n.getType() instanceof ClassTypeNode){
+//			System.out.println("Var Dec: ClassTypeNode");
+//			ClassTypeNode classType = (ClassTypeNode) n.getType();
+//			Map<String, STentry> ctable = classTable.get(classType.id);
+//			if (ctable == null){
+//				System.out.println("Class id " + n.id + " at line "+ n.getLine() +" not declared");
+//				stErrors++;
+//			}
+//
+//			RefTypeNode refType = new RefTypeNode(classType.id);
+//			hm.put(n.id, new STentry(nestingLevel, refType, decOffset--));
+//		}else {
+//			// ClassTypeNode classType = (ClassTypeNode) n.getType();
+//			RefTypeNode refType = (RefTypeNode) n.getType();
+//			hm.put(n.id, new STentry(nestingLevel, refType, decOffset--));
+//		}
 
 		return null;
 	}
@@ -298,7 +299,7 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 				stErrors++;
 			}
 
-			System.out.println("Field type: " + field.type);
+			// System.out.println("Field type: " + field.type);
 			classType.allFields.add(-fieldEntry.offset - 1, field.type);
 			// fieldOffset--;
 			// classType.allFields.add(field.getType());
@@ -329,19 +330,21 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 	public Void visitNode(ClassCallNode n) {
 		if (print) printNode(n);
 
-		STentry ref = stLookup(n.id1);
-		if (ref.type == null) {
+		STentry entry = stLookup(n.id1);
+		if (entry.type == null) {
 			System.out.println("Class of id1 " + n.id1 + " at line " + n.getLine() + " not declared");
 			stErrors++;
 			return null;
 		}
 
-		RefTypeNode refType = new RefTypeNode(ref.type.toString());
-		// ClassTypeNode refType = (ClassTypeNode) ref.type;
-		Map<String, STentry> vtable = classTable.get(refType.id);
+		RefTypeNode ref = (RefTypeNode) entry.type;
+		System.out.println("RefTypeNode ID: " + ref);
+		Map<String, STentry> vtable = classTable.get(ref.id);
+
 		if (vtable == null) {
 			System.out.println("Class of id1 " + n.id1 + " at line " + n.getLine() + " not declared");
 			stErrors++;
+			return null;
 		} else {
 			n.entry = vtable.get(n.id1);
 			n.nl = nestingLevel;
@@ -349,7 +352,7 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 
 		STentry methodEntry = vtable.get(n.id2);
 		if (methodEntry == null) {
-			System.out.println("Method id " + n.id1 + " at line " + n.getLine() + " not declared in class " + refType.id);
+			System.out.println("Method id " + n.id1 + " at line " + n.getLine() + " not declared in class " + ref.id);
 			stErrors++;
 			return null;
 		}
@@ -382,10 +385,8 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 			System.out.println("Class id " + n.id + " at line " + n.getLine() + " not found in symbol table");
 			stErrors++;
 			return null;
-		}
-
-		// Set the entry field of the NewNode to the retrieved STentry
-		n.entry = classEntry;
+		} else
+			n.entry = classEntry;
 
 		for (Node arg : n.arglist)
 			visit(arg);
