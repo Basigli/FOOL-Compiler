@@ -334,7 +334,7 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 						"js"  // jump to to popped address
 				)
 		);
-		return "push " + label;
+		return "";
 	}
 	@Override
 	public String visitNode(ClassNode n) {
