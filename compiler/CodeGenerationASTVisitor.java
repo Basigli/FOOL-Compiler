@@ -345,4 +345,11 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 		}
 		return null;
 	}
+
+	@Override
+	public String visitNode(EmptyNode n) {
+		return nlJoin(
+				"push -1"
+		);
+	}
 }
