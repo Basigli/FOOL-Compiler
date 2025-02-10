@@ -4,6 +4,7 @@ import compiler.AST.*;
 import compiler.lib.*;
 import compiler.exc.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static compiler.lib.FOOLlib.*;
@@ -338,12 +339,29 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 	}
 	@Override
 	public String visitNode(ClassNode n) {
-		List<String> dispatchTable = null;
-		for (Node dec : n.methodList) {
+		List<String> dispatchTable = new ArrayList<>();
+		for (MethodNode dec : n.methodList) {
 			visit(dec);
-			dispatchTable.add(((MethodNode) dec).id);
+			dispatchTable.add(dec.id);
 		}
-		return null;
+		String pushCode = "";
+		for (String method : dispatchTable) {
+			pushCode = nlJoin(
+					pushCode,
+						"push " + method,
+						"lhp",
+						"sw",
+						"lhp",
+						"push 1",
+						"add",
+						"shp"
+					);
+		}
+		return nlJoin(
+				"lhp",
+				pushCode
+
+		);
 	}
 
 	@Override
@@ -352,4 +370,5 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 				"push -1"
 		);
 	}
+
 }
