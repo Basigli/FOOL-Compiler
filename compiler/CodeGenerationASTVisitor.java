@@ -3,6 +3,7 @@ package compiler;
 import compiler.AST.*;
 import compiler.lib.*;
 import compiler.exc.*;
+import visualsvm.ExecuteVM;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -406,8 +407,53 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 				argCode, // Generate code for argument expressions in reversed order
 				"js"  // Jump to popped address (saving address of subsequent instruction in $ra)
 		);
+	}
 
+	@Override
+	public String visitNode(NewNode n) {
+		String argCode = null;
+		for (Node arg: n.arglist) argCode = nlJoin(argCode, visit(arg));
+		// Store arguments in the heap and increment heap pointer
+		String storeArgsCode = null;
+		for (int i = 0; i < n.arglist.size(); i++) {
+			storeArgsCode = nlJoin(
+					storeArgsCode,
+					"lhp", // load heap pointer
+					"sw",  // store word at heap pointer
+					"lhp", // load heap pointer
+					"push 1",
+					"add", // increment heap pointer
+					"shp"  // store updated heap pointer
+			);
+		}
 
+		// Write dispatch pointer to the heap
+		String dispatchPointerCode = nlJoin(
+				"lhp", // load heap pointer
+				"push " + (ExecuteVM.MEMSIZE + n.entry.offset), // load dispatch pointer address
+				"lw",  // load dispatch pointer
+				"sw",  // store dispatch pointer at heap pointer
+				"lhp", // load heap pointer
+				"push 1",
+				"add", // increment heap pointer
+				"shp"  // store updated heap pointer
+		);
+
+		// Push object pointer onto the stack and increment heap pointer
+		String objectPointerCode = nlJoin(
+				"lhp", // load heap pointer
+				"push 1",
+				"add", // increment heap pointer
+				"shp"  // store updated heap pointer
+		);
+
+		return nlJoin(
+				argCode,           // generate code for arguments
+				storeArgsCode,     // store arguments in the heap
+				dispatchPointerCode, // write dispatch pointer to the heap
+				"lhp",             // load heap pointer (object pointer)
+				objectPointerCode  // push object pointer onto the stack and increment heap pointer
+		);
 	}
 
 }
