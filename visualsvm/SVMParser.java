@@ -162,8 +162,30 @@ public class SVMParser extends Parser {
 			}
 			setState(10);
 			match(EOF);
+
+			for (Integer j: labelRef.keySet()){
+				System.out.print(j + " : ");
+				System.out.println(labelRef.get(j));
+			}
+
+			for (String j: labelDef.keySet()){
+				System.out.print(j + " : ");
+				System.out.println(labelDef.get(j));
+			}
+
+			// check corrispondance between labelDef & labelRef
+				for (Map.Entry<Integer, String> entry : labelRef.entrySet()) {
+					Integer position = entry.getKey();
+					String label = entry.getValue();
+					if (!labelDef.containsKey(label)) {
+						System.out.println("Label " + label + " not found in labelDef");
+						// throw new NullPointerException("Label " + label + " not found in labelDef");
+					}
+					//code[position] = labelDef.get(label);
+				}
+
 			 for (Integer j: labelRef.keySet())
-											code[j]=labelDef.get(labelRef.get(j));
+				  code[j]=labelDef.get(labelRef.get(j));
 										
 			}
 		}

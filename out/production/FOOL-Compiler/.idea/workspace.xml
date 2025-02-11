@@ -5,15 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="323a84bc-aa5e-4433-ad93-19985572358f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/compiler/AST.java" beforeDir="false" afterPath="$PROJECT_DIR$/compiler/AST.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/compiler/CodeGenerationASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/compiler/CodeGenerationASTVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/compiler/TypeCheckEASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/compiler/TypeCheckEASTVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/compiler/TypeRels.java" beforeDir="false" afterPath="$PROJECT_DIR$/compiler/TypeRels.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/CodeGenerationASTVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/CodeGenerationASTVisitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/SymbolTableASTVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/SymbolTableASTVisitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/TypeRels.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/TypeRels.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/testClass.fool.asm" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/testClass.fool.asm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testClass.fool.asm" beforeDir="false" afterPath="$PROJECT_DIR$/testClass.fool.asm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/quicksort.fool.asm" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/quicksort.fool.asm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/visualsvm/SVMParser$InstructionContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/visualsvm/SVMParser$InstructionContext.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/visualsvm/SVMParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/visualsvm/SVMParser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quicksort.fool.asm" beforeDir="false" afterPath="$PROJECT_DIR$/quicksort.fool.asm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/visualsvm/SVMParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/visualsvm/SVMParser.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

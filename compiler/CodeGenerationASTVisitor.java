@@ -147,7 +147,9 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 	@Override
 	public String visitNode(CallNode n) {
 		if (print) printNode(n, n.id);
-		String argCode = null, getAR = null;
+		String argCode = null;
+		String getAR = null;
+
 		for (int i = n.arglist.size() - 1; i >= 0; i--) argCode = nlJoin(argCode, visit(n.arglist.get(i)));
 		for (int i = 0; i < n.nl - n.entry.nl; i++) getAR = nlJoin(getAR, "lw");
 
@@ -340,6 +342,7 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 		}
 		for (int i = 0; i < n.parlist.size(); i++) popParl = nlJoin(popParl, "pop");
 		String label = freshFunLabel();
+		n.label = label;
 		putCode(
 				nlJoin(
 						label + ":",
@@ -360,13 +363,21 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 		);
 		return "";
 	}
+
 	@Override
 	public String visitNode(ClassNode n) {
 		List<String> dispatchTable = new ArrayList<>();
+
+		for (MethodNode dec : n.methodList)
+			System.out.println("MethodList " + dec.id);
+
 		for (MethodNode dec : n.methodList) {
 			visit(dec);
-			dispatchTable.add(dec.id);
+			dispatchTable.add(dec.label);
 		}
+
+		// dispatchTables.add(dispatchTable);
+
 		String pushCode = "";
 		for (String method : dispatchTable) {
 			pushCode = nlJoin(
@@ -404,9 +415,10 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 		for (int i = 0; i < n.nl - n.entry.nl; i++) getAR = nlJoin(getAR, "lw");
 
 		return nlJoin(
+				"lfp",
 				argCode, 						// generate code for argument expressions in reversed order
 				"lfp",
-				"lfp", getAR, // Retrieve address of frame containing ID1 declaration
+				getAR, // Retrieve address of frame containing ID1 declaration
 				"push " + n.entry.offset, "add", // Compute address of ID1 declaration
 				"lw", // Load object pointer (ID1)
 				"stm", // Set $tm to popped value (object pointer)
@@ -442,8 +454,7 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 				argCode,
 				"push " + address,	// load on the stack the address
 				"lw", 				// put on the stack the value in 'address' from memory
-				"lhp", 				// load on the stack the hp value
-				// - to be intended as dispatch pointer address
+				"lhp", 				// load on the stack the hp value (as dispatch pointer address)
 				"sw", 				// store at address 'hp' the dispatch pointer
 				"lhp", 				// load on the stack hp value
 				"lhp",				// load hp with the aim of increment it

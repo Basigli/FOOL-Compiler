@@ -1,14 +1,14 @@
 push 0
 lhp
 
-push first
+push function0
 lhp
 sw
 lhp
 push 1
 add
 shp
-push rest
+push function1
 lhp
 sw
 lhp
