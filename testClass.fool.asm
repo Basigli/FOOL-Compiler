@@ -15,14 +15,10 @@ lhp
 push 1
 add
 shp
-lhp
 push 9998
 lw
-sw
 lhp
-push 1
-add
-shp
+sw
 lhp
 lhp
 push 1

@@ -15,5 +15,4 @@ public class TypeRels {
 				|| ((a instanceof EmptyTypeNode) && (b instanceof RefTypeNode))
 				|| ((a instanceof RefTypeNode) && (b instanceof EmptyTypeNode));
 	}
-
 }

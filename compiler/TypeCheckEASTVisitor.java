@@ -30,7 +30,7 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 				visit(dec);
 			} catch (IncomplException e) { 
 			} catch (TypeException e) {
-				System.out.println("ProgLetInNode -> " + "Type checking error in a declaration: " + e.text + dec.toString());
+				System.out.println("ProgLetInNode -> " + "Type checking error in a declaration: " + e.text + " " + dec.toString());
 			}
 		return visit(n.exp);
 	}
@@ -315,19 +315,34 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 	@Override
 	public TypeNode visitNode(ClassCallNode n) throws TypeException {
 		if (print) printNode(n,n.id1);
+
+		System.out.println("CLASSCALLNODE ENTRY " + n.entry.type);
 		TypeNode t = visit(n.entry);
 
-		if ( !(t instanceof ClassTypeNode) )
-			throw new TypeException("Invocation of a non-class "+n.id1,n.getLine());
+		if ( !(t instanceof RefTypeNode) )
+			throw new TypeException("Invocation of a non-class " + n.id1,n.getLine());
 
-		ClassTypeNode ct = (ClassTypeNode) t;
-		if ( !(ct.allMethods.size() == n.arglist.size()) )
-			throw new TypeException("Wrong number of parameters in the invocation of "+n.id1,n.getLine());
+		System.out.println("CLASSCALLNODE TYPE " + t);
 
+		if (!(n.methodEntry.type instanceof ArrowTypeNode))
+			throw new TypeException("Invocation of a non-function " + n.id2, n.getLine());
+		ArrowTypeNode at = (ArrowTypeNode) n.methodEntry.type;
+		if (!(at.parlist.size() == n.arglist.size()))
+			throw new TypeException("Wrong number of parameters in the invocation of " + n.id2, n.getLine());
 		for (int i = 0; i < n.arglist.size(); i++)
-			if ( !(isSubtype(visit(n.arglist.get(i)),ct.allMethods.get(i))) )
-				throw new TypeException("Wrong type for "+(i+1)+"-th parameter in the invocation of "+n.id1,n.getLine());
-		return null;
+			if (!(isSubtype(visit(n.arglist.get(i)), at.parlist.get(i))))
+				throw new TypeException("Wrong type for " + (i + 1) + "-th parameter in the invocation of " + n.id2,
+						n.getLine());
+		return at.ret;
+
+//		ClassTypeNode ct = (ClassTypeNode) t;
+//		if ( !(ct.allMethods.size() == n.arglist.size()) )
+//			throw new TypeException("Wrong number of parameters in the invocation of "+n.id1,n.getLine());
+//
+//		for (int i = 0; i < n.arglist.size(); i++)
+//			if ( !(isSubtype(visit(n.arglist.get(i)),ct.allMethods.get(i))) )
+//				throw new TypeException("Wrong type for "+(i+1)+"-th parameter in the invocation of "+n.id1,n.getLine());
+		// return null;
 	}
 
 
@@ -341,9 +356,9 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 
 		// Check if the number of arguments matches the number of fields
 		ClassTypeNode classType = (ClassTypeNode) n.entry.type;
-//		System.out.println(classType.id);
-//		System.out.println(classType.allFields);
-//		System.out.println(classType.allMethods);
+		System.out.println(classType.id);
+		System.out.println(classType.allFields);
+		System.out.println(classType.allMethods);
 
 		if (n.arglist.size() != classType.allFields.size()) {
 			throw new TypeException("Wrong number of parameters in the instantiation of " + n.id, n.getLine());

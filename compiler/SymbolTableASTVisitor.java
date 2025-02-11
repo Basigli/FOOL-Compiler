@@ -373,9 +373,15 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 			System.out.println("Class of id1 " + n.id1 + " at line " + n.getLine() + " not declared");
 			stErrors++;
 			return null;
-		} else {
-			n.entry = vtable.get(n.id1);
+		}
+
+		if(stLookup(n.id1) == null){
+			// n.entry = symTable.get(nestingLevel).get(n.id1);
+			System.out.println("ID1: " + n.id1 + " at line " + n.getLine() + " not found in vtable");
+			return null;
+		}else{
 			n.nl = nestingLevel;
+			n.entry = stLookup(n.id1);
 		}
 
 		STentry methodEntry = vtable.get(n.id2);
@@ -385,6 +391,8 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 			return null;
 		}
 
+		n.methodEntry = methodEntry;
+
 		for (Node arg : n.arglist) visit(arg);
 		return null;
 	}
@@ -392,11 +400,13 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 	@Override
 	public Void visitNode(NewNode n) {
 		if (print) printNode(n);
-
-		// RefTypeNode refType = new RefTypeNode(n.id);
+//      RefTypeNode refType = new RefTypeNode(n.id);
 //		System.out.println(n.arglist.get(1));
 //		Map<String, STentry> hm = symTable.get(nestingLevel);
 //		hm.put(n.id, new STentry(nestingLevel, refType, decOffset--));
+
+		System.out.println("NEW NODE ID: "    + n.id);
+		System.out.println("NEW NODE ARG: "   + n.arglist);
 
 		// Retrieve the STentry of the class ID from the class table
 		Map<String, STentry> vtable = classTable.get(n.id);
@@ -413,8 +423,10 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 			System.out.println("Class id " + n.id + " at line " + n.getLine() + " not found in symbol table");
 			stErrors++;
 			return null;
-		} else
+		}else {
+			System.out.println("SYMTABLE ENTRY: " + classEntry.type);
 			n.entry = classEntry;
+		}
 
 		for (Node arg : n.arglist)
 			visit(arg);
