@@ -376,7 +376,8 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 
 		for (MethodNode dec : n.methodList) {
 			visit(dec);
-			dispatchTable.add(dec.label);
+			//dispatchTable.add(dec.label);
+			dispatchTable.add(dec.offset, dec.label);
 		}
 
 		// dispatchTables.add(dispatchTable);
@@ -465,6 +466,7 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 				"add",				// calculate new hp value
 				"shp"				// pop the new value and put it into hp
 		);
+
 	}
 
 }
