@@ -1,14 +1,14 @@
 push 0
 lhp
 
-push first
+push function0
 lhp
 sw
 lhp
 push 1
 add
 shp
-push rest
+push function1
 lhp
 sw
 lhp
@@ -283,7 +283,7 @@ stm
 ltm
 ltm
 lw
-push -2
+push 0
 add
 lw
 js
@@ -298,7 +298,7 @@ stm
 ltm
 ltm
 lw
-push -3
+push 1
 add
 lw
 js
@@ -364,7 +364,7 @@ stm
 ltm
 ltm
 lw
-push -2
+push 0
 add
 lw
 js
@@ -382,7 +382,7 @@ stm
 ltm
 ltm
 lw
-push -3
+push 1
 add
 lw
 js
@@ -500,7 +500,7 @@ stm
 ltm
 ltm
 lw
-push -2
+push 0
 add
 lw
 js
@@ -545,7 +545,7 @@ stm
 ltm
 ltm
 lw
-push -3
+push 1
 add
 lw
 js
@@ -572,7 +572,7 @@ stm
 ltm
 ltm
 lw
-push -2
+push 0
 add
 lw
 js
@@ -594,7 +594,7 @@ stm
 ltm
 ltm
 lw
-push -3
+push 1
 add
 lw
 js
@@ -673,7 +673,7 @@ stm
 ltm
 ltm
 lw
-push -2
+push 0
 add
 lw
 js
@@ -715,7 +715,7 @@ stm
 ltm
 ltm
 lw
-push -3
+push 1
 add
 lw
 js
@@ -780,7 +780,7 @@ stm
 ltm
 ltm
 lw
-push -3
+push 1
 add
 lw
 js

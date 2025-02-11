@@ -494,6 +494,7 @@ public class ExecuteVM {
         }
         if (this.sp <= this.hp) {
             System.out.println("Segmentation fault");
+            System.out.println(sp + " < " + hp);
             this.outputText.append("Segmentation fault\n");
             return false;
         }

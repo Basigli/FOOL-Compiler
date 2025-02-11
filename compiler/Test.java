@@ -11,7 +11,7 @@ import java.nio.file.*;
 public class Test {
     public static void main(String[] args) throws Exception {
 
-		String fileName = "quicksort.fool";
+		String fileName = "testClass.fool";
 
     	CharStream chars = CharStreams.fromFileName(fileName);
     	FOOLLexer lexer = new FOOLLexer(chars);

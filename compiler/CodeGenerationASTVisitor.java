@@ -54,6 +54,7 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 		}
 		for (int i = 0; i < n.parlist.size(); i++) popParl = nlJoin(popParl, "pop");
 		String funl = freshFunLabel();
+		System.out.println("FunNode: " + n.id + " -> " + funl);
 		putCode(
 				nlJoin(
 						funl + ":",
@@ -343,6 +344,8 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 		for (int i = 0; i < n.parlist.size(); i++) popParl = nlJoin(popParl, "pop");
 		String label = freshFunLabel();
 		n.label = label;
+		System.out.println(n.id + " associated with label: " + n.label);
+
 		putCode(
 				nlJoin(
 						label + ":",

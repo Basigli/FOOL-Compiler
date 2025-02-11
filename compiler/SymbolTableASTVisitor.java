@@ -271,7 +271,9 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 		List<TypeNode> parTypes = new ArrayList<>();
 
 		for (ParNode par : n.parlist) parTypes.add(par.getType());
-		STentry entry = new STentry(nestingLevel, new ArrowTypeNode(parTypes, n.retType), decOffset--);
+
+		n.offset = decOffset;
+		STentry entry = new STentry(nestingLevel, new ArrowTypeNode(parTypes, n.retType), decOffset++);
 
 		// Insert method ID into the symbol table
 		if (hm.put(n.id, entry) != null) {
@@ -334,21 +336,25 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 
 		// Visit fields
 		if(!n.fieldList.isEmpty()) for (FieldNode field : n.fieldList) {
-			STentry fieldEntry = new STentry(nestingLevel, field.getType(), fieldOffset--);
+			STentry fieldEntry = new STentry(nestingLevel, field.getType(), fieldOffset);
 			if (vtable.put(field.id, fieldEntry) != null) {
 				System.out.println("Field id " + field.id + " at line " + n.getLine() + " already declared");
 				stErrors++;
 			}
 			classType.allFields.add(-fieldEntry.offset - 1, field.type);
+			fieldOffset--;
 		}
 
 		// VISIT METHODs
+		int savedOffset = decOffset;
+		decOffset = methodOffset;
 		if(!n.methodList.isEmpty())
 			for (MethodNode method : n.methodList) {
 				visit(method);
 				classType.allMethods.add(method.offset,  (ArrowTypeNode)method.getType());
 		}
 
+		decOffset = savedOffset;
 		symTable.remove(nestingLevel--);
 		decOffset = prevNLDecOffset;
 		return null;
