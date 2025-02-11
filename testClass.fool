@@ -3,4 +3,4 @@ let
     fun first:int () 0;
   }
    var l:List = new List(5);
-in true;
+in print(l.first());
