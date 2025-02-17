@@ -1,0 +1,8 @@
+let
+  class List (f:int) {
+    fun first:int() f;
+  }
+  fun printList:int (l:int) l;
+
+  var l:List = new List(2);
+in printList(l.first());
