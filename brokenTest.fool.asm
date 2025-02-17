@@ -27,6 +27,7 @@ add
 shp
 lfp
 lfp
+lfp
 push -4
 add
 lw
@@ -38,7 +39,17 @@ push 0
 add
 lw
 js
-print
+lfp
+stm
+ltm
+push -3
+add
+lw
+ltm
+push -4
+add
+lw
+js
 halt
 
 function0:

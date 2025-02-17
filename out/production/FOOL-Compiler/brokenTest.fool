@@ -5,5 +5,4 @@ let
   fun printList:int (l:int) l;
 
   var l:List = new List(2);
-in
-print(l.first());
+in printList(l.first());
