@@ -1,7 +1,7 @@
 push 0
 lhp
 
-push first
+push function0
 lhp
 sw
 lhp
