@@ -178,7 +178,7 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 					"ltm" ,							// load that address
 					"push " + n.entry.offset,		// push function declaration offset
 					"add",							// calculate function declaration address
-					"lw",							// put the value on the stack from memory
+					// "lw",							// put the value on the stack from memory
 					"ltm" ,							// put AR on stack again
 					"push " + (n.entry.offset-1),	// push offset-1 - where the label is -
 					"add",							// calculate function's label address
