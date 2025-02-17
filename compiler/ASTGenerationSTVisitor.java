@@ -273,7 +273,7 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 
 
 	@Override
-	public Node visitClassCall(ClassCallContext c) {
+	public Node visitDotCall(DotCallContext c) {
 		if (print) printVarAndProdName(c);
 		List<Node> arglist = new ArrayList<>();
 		for (ExpContext arg : c.exp()) arglist.add(visit(arg));
@@ -290,7 +290,7 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 		return n;
 	}
 
-	public Node visitMethodDec(MethodDecContext c) {
+	public Node visitMethdec(MethdecContext c) {
 		if (print) printVarAndProdName(c);
 		List<ParNode> parList = new ArrayList<>();
 		for (int i = 1; i < c.ID().size(); i++) {
