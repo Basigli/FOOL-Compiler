@@ -65,51 +65,57 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 
 	// ------------- OPERATORS CONTEXTS -------------
 	@Override
-	public Node visitTimes(TimesContext c) {
+	public Node visitTimesDiv(TimesDivContext c) {
 		if (print) printVarAndProdName(c);
-		Node n = new TimesNode(visit(c.exp(0)), visit(c.exp(1)));
-		n.setLine(c.TIMES().getSymbol().getLine());		// setLine added
-        return n;		
+		if (c.TIMES().getSymbol() != null) {
+			Node n = new TimesNode(visit(c.exp(0)), visit(c.exp(1));
+			n.setLine(c.TIMES().getSymbol().getLine());
+			return n;
+		} else {
+			Node n = new DivisionNode(visit(c.exp(0)), visit(c.exp(1));
+			n.setLine(c.DIV().getSymbol().getLine());
+			return n;
+		}
 	}
 
 	@Override
-	public Node visitPlus(PlusContext c) {
+	public Node visitPlusMinus(PlusMinusContext c) {
 		if (print) printVarAndProdName(c);
-		Node n = new PlusNode(visit(c.exp(0)), visit(c.exp(1)));
-		n.setLine(c.PLUS().getSymbol().getLine());	
-        return n;		
+
+		if(c.MINUS().getSymbol() != null){
+			Node n = new MinusNode(visit(c.exp(0)), visit(c.exp(1)));
+			n.setLine(c.MINUS().getSymbol().getLine());
+			return n;
+		}else {
+			Node n = new PlusNode(visit(c.exp(0)), visit(c.exp(1)));
+			n.setLine(c.PLUS().getSymbol().getLine());
+			return n;
+		}
 	}
 
 	@Override
-	public Node visitMinus(MinusContext c) {
+	public Node visitComp(CompContext c) {
 		if (print) printVarAndProdName(c);
-		Node n = new MinusNode(visit(c.exp(0)), visit(c.exp(1)));
-		n.setLine(c.MINUS().getSymbol().getLine());
-		return n;
-	}
 
-	@Override
-	public Node visitEq(EqContext c) {
-		if (print) printVarAndProdName(c);
-		Node n = new EqualNode(visit(c.exp(0)), visit(c.exp(1)));
-		n.setLine(c.EQ().getSymbol().getLine());		
-        return n;		
-	}
+		if(c.EQ() != null){
+			Node n = new EqualNode(visit(c.exp(0)), visit(c.exp(1)));
+			n.setLine(c.EQ().getSymbol().getLine());
+			return n;
+		}
 
-	@Override
-	public Node visitGeq(GeqContext c) {
-		if (print) printVarAndProdName(c);
-		Node n = new GreaterEqualNode(visit(c.exp(0)), visit(c.exp(1)));
-		n.setLine(c.GEQ().getSymbol().getLine());
-		return n;
-	}
+		if (c.LE() != null) {
+			Node n = new LessEqualNode(visit(c.exp(0)), visit(c.exp(1)));
+			n.setLine(c.LE().getSymbol().getLine());
+			return n;
+		}
 
-	@Override
-	public Node visitLeq(LeqContext c) {
-		if (print) printVarAndProdName(c);
-		Node n = new LessEqualNode(visit(c.exp(0)), visit(c.exp(1)));
-		n.setLine(c.LEQ().getSymbol().getLine());
-		return n;
+		if (c.GE() != null) {
+			Node n = new GreaterEqualNode(visit(c.exp(0)), visit(c.exp(1)));
+			n.setLine(c.GE().getSymbol().getLine());
+			return n;
+		}
+
+		return null;
 	}
 
 	@Override
@@ -123,28 +129,20 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 	}
 
 	@Override
-	public Node visitAnd(AndContext c) {
+	public Node visitAndOr(AndOrContext c) {
 		if (print) printVarAndProdName(c);
-		Node n = new AndNode(visit(c.exp(0)), visit(c.exp(1)));
-		n.setLine(c.AND().getSymbol().getLine());
-		return n;
+
+		if (c.AND() != null) {
+			Node n = new AndNode(visit(c.exp(0)), visit(c.exp(1)));
+			n.setLine(c.AND().getSymbol().getLine());
+			return n;
+		} else {
+			Node n = new OrNode(visit(c.exp(0)), visit(c.exp(1)));
+			n.setLine(c.OR().getSymbol().getLine());
+			return n;
+		}
 	}
 
-	@Override
-	public Node visitOr(OrContext c) {
-		if (print) printVarAndProdName(c);
-		Node n = new OrNode(visit(c.exp(0)), visit(c.exp(1)));
-		n.setLine(c.OR().getSymbol().getLine());
-		return n;
-	}
-
-	@Override
-	public Node visitDivision(DivisionContext c) {
-		if (print) printVarAndProdName(c);
-		Node n = new DivisionNode(visit(c.exp(0)), visit(c.exp(1)));
-		n.setLine(c.DIVISION().getSymbol().getLine());
-		return n;
-	}
 
 	// ------------- DECS CONTEXTS -------------
 	@Override
@@ -194,7 +192,7 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 	}
 
 	@Override
-	public Node visitClassType(ClassTypeContext c) {
+	public Node visitIdType(IdTypeContext c) {
 		if (print) printVarAndProdName(c);
 		 // return new ClassTypeNode(c.ID().getText(), new ArrayList<>(), new ArrayList<>());
 		return new RefTypeNode(c.ID().getText());
@@ -258,7 +256,7 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 
 	// ------------- OO CONTEXTS -------------
 	@Override
-	public Node visitEmpty(EmptyContext c) {
+	public Node visitNull(NullContext c) {
 		if (print) printVarAndProdName(c);
 		return new EmptyNode();
 	}
