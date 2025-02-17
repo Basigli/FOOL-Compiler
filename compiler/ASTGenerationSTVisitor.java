@@ -36,7 +36,7 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
         indent=(indent==null)?"":indent+"  ";
         Node result = super.visit(t);
         indent=temp;
-        return result; 
+        return result;
 	}
 
 	@Override
@@ -49,6 +49,7 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 	public Node visitLetInProg(LetInProgContext c) {
 		if (print) printVarAndProdName(c);
 		List<DecNode> declist = new ArrayList<>();
+		for (CldecContext dec : c.cldec()) declist.add((DecNode) visit(dec));
 		for (DecContext dec : c.dec()) declist.add((DecNode) visit(dec));
 		return new ProgLetInNode(declist, visit(c.exp()));
 	}
@@ -279,7 +280,6 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 		if (print) printVarAndProdName(c);
 		List<Node> arglist = new ArrayList<>();
 		for (ExpContext arg : c.exp()) arglist.add(visit(arg));
-		// System.out.println(c.ID().toString());
 		Node n = new ClassCallNode(c.ID().get(0).getText(), c.ID().get(1).getText(), arglist);
 		n.setLine(c.ID().get(1).getSymbol().getLine());
 		return n;
