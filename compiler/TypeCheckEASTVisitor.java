@@ -328,14 +328,6 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 						n.getLine());
 		return at.ret;
 
-//		ClassTypeNode ct = (ClassTypeNode) t;
-//		if ( !(ct.allMethods.size() == n.arglist.size()) )
-//			throw new TypeException("Wrong number of parameters in the invocation of "+n.id1,n.getLine());
-//
-//		for (int i = 0; i < n.arglist.size(); i++)
-//			if ( !(isSubtype(visit(n.arglist.get(i)),ct.allMethods.get(i))) )
-//				throw new TypeException("Wrong type for "+(i+1)+"-th parameter in the invocation of "+n.id1,n.getLine());
-		// return null;
 	}
 
 
@@ -368,12 +360,10 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 
 	@Override
 	public TypeNode visitNode(ClassTypeNode n) throws TypeException {
-		// logic
 		return null;
 	}
 	@Override
 	public TypeNode visitNode(RefTypeNode n) throws TypeException {
-		// logic
 		return null;
 	}
 	@Override
