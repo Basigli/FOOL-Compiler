@@ -350,7 +350,15 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 			return null;
 		}
 
-		RefTypeNode ref = (RefTypeNode) entry.type;
+		RefTypeNode ref;
+		try{
+			ref = (RefTypeNode) entry.type;
+		}catch(ClassCastException e){
+			System.out.println("ID1: " + n.id1 + " at line " + n.getLine() + " is not a class");
+			stErrors++;
+			return null;
+		}
+
 		Map<String, STentry> vtable = classTable.get(ref.id);
 
 		if (vtable == null) {

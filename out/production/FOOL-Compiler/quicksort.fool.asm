@@ -161,22 +161,16 @@ lw
 lfp
 stm
 ltm
-push -6
-add
-lw
 ltm
-push -7
+push -6
 add
 lw
 js
 lfp
 stm
 ltm
-push -3
-add
-lw
 ltm
-push -4
+push -3
 add
 lw
 js
@@ -306,22 +300,16 @@ lfp
 lw
 stm
 ltm
-push -3
-add
-lw
 ltm
-push -4
+push -3
 add
 lw
 js
 lfp
 stm
 ltm
-push -2
-add
-lw
 ltm
-push -3
+push -2
 add
 lw
 js
@@ -390,11 +378,8 @@ lfp
 lw
 stm
 ltm
-push -4
-add
-lw
 ltm
-push -5
+push -4
 add
 lw
 js
@@ -517,11 +502,8 @@ label19:
 lfp
 stm
 ltm
-push -2
-add
-lw
 ltm
-push -3
+push -2
 add
 lw
 js
@@ -553,11 +535,8 @@ lfp
 lw
 stm
 ltm
-push -5
-add
-lw
 ltm
-push -6
+push -5
 add
 lw
 js
@@ -602,11 +581,8 @@ lfp
 lw
 stm
 ltm
-push -5
-add
-lw
 ltm
-push -6
+push -5
 add
 lw
 js
@@ -723,11 +699,8 @@ lfp
 lw
 stm
 ltm
-push -5
-add
-lw
 ltm
-push -6
+push -5
 add
 lw
 js
@@ -735,11 +708,8 @@ lfp
 lw
 stm
 ltm
-push -6
-add
-lw
 ltm
-push -7
+push -6
 add
 lw
 js
@@ -788,9 +758,15 @@ lfp
 lw
 stm
 ltm
+ltm
 push -5
 add
 lw
+js
+lfp
+lw
+stm
+ltm
 ltm
 push -6
 add
@@ -800,23 +776,8 @@ lfp
 lw
 stm
 ltm
-push -6
-add
-lw
-ltm
-push -7
-add
-lw
-js
-lfp
-lw
-stm
 ltm
 push -4
-add
-lw
-ltm
-push -5
 add
 lw
 js
