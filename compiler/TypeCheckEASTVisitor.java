@@ -45,14 +45,8 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 	public TypeNode visitNode(FunNode n) throws TypeException {
 		if (print) printNode(n,n.id);
 
-		System.out.println("FUN: " + n.id);
-		System.out.println("RET: " + n.retType);
-		System.out.println("DEC: " + n.declist);
-		System.out.println("EXP: " + n.exp);
-
 		for (Node dec : n.declist)
 			try {
-				System.out.println("DEC: " + dec);
 				visit(dec);
 			} catch (IncomplException e) { 
 			} catch (TypeException e) {
@@ -82,9 +76,6 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 		if (print) printNode(n);
 		if ( !(isSubtype(visit(n.cond), new BoolTypeNode())) )
 			throw new TypeException("Non boolean condition in if",n.getLine());
-
-		System.out.println("THEN: " + n.th);
-		System.out.println("ELSE: " + n.el);
 
 		TypeNode t = visit(n.th);
 		TypeNode e = visit(n.el);
@@ -185,8 +176,6 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 	public TypeNode visitNode(NotNode n) throws TypeException {
 		if (print) printNode(n);
 
-		System.out.println("EXP: " + n.exp);
-
 		if ( !(isSubtype(visit(n.exp), new BoolTypeNode())))
 			throw new TypeException("Non boolean in not",n.getLine());
 		return new IntTypeNode();
@@ -223,9 +212,6 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 		if (print) printNode(n,n.id);
 		TypeNode t = visit(n.entry);
 
-		System.out.println("ID: " + n.id);
-		System.out.println("TYPE: " + n.entry.type);
-
 		if (t instanceof ArrowTypeNode)
 			throw new TypeException("Wrong usage of function identifier " + n.id,n.getLine());
 		return t;
@@ -243,8 +229,6 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 		return new IntTypeNode();
 	}
 
-// gestione tipi incompleti	(se lo sono lancia eccezione)
-	
 	@Override
 	public TypeNode visitNode(ArrowTypeNode n) throws TypeException {
 		if (print) printNode(n);
@@ -323,14 +307,11 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 	@Override
 	public TypeNode visitNode(ClassCallNode n) throws TypeException {
 		if (print) printNode(n,n.id1);
-
-		System.out.println("CLASSCALLNODE ENTRY " + n.entry.type);
 		TypeNode t = visit(n.entry);
 
 		if ( !(t instanceof RefTypeNode) )
 			throw new TypeException("Invocation of a non-class " + n.id1,n.getLine());
 
-		System.out.println("CLASSCALLNODE TYPE " + t);
 
 		if (!(n.methodEntry.type instanceof ArrowTypeNode))
 			throw new TypeException("Invocation of a non-function " + n.id2, n.getLine());
@@ -364,9 +345,6 @@ public class TypeCheckEASTVisitor extends BaseEASTVisitor<TypeNode,TypeException
 
 		// Check if the number of arguments matches the number of fields
 		ClassTypeNode classType = (ClassTypeNode) n.entry.type;
-		System.out.println(classType.id);
-		System.out.println(classType.allFields);
-		System.out.println(classType.allMethods);
 
 		if (n.arglist.size() != classType.allFields.size()) {
 			throw new TypeException("Wrong number of parameters in the instantiation of " + n.id, n.getLine());

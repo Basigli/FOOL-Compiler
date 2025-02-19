@@ -54,7 +54,6 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 		}
 		for (int i = 0; i < n.parlist.size(); i++) popParl = nlJoin(popParl, "pop");
 		String funl = freshFunLabel();
-		System.out.println("FunNode: " + n.id + " -> " + funl);
 		putCode(
 				nlJoin(
 						funl + ":",
@@ -70,7 +69,7 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 						"sfp", // set $fp to popped value (Control Link)
 						"ltm", // load $tm value (function result)
 						"lra", // load $ra value
-						"js"  // jump to to popped address
+						"js"  // jump to popped address
 				)
 		);
 		return "push " + funl;
@@ -156,7 +155,7 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 
 		if (n.entry.offset < 0) {
 			return nlJoin(
-					"lfp", 		// load Control Link (pointer to frame of function "id" caller)
+					"lfp", 		    // load Control Link (pointer to frame of function "id" caller)
 					argCode, 				// generate code for argument expressions in reversed order
 					"lfp", 					// retrieve address of frame containing "id" declaration
 					getAR, 					// by following the static chain (of Access Links)
@@ -170,7 +169,7 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 			);
 		} else {	// method case
 			return nlJoin(
-					"lfp", 							// load Control Link (pointer to frame of function "id" caller)
+					"lfp", 					// load Control Link (pointer to frame of function "id" caller)
 					argCode, 						// generate code for argument expressions in reversed order
 					"lfp", 							// retrieve address of frame containing "id" declaration
 					getAR, 							// by following the static chain (of Access Links)
@@ -341,8 +340,6 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 		for (int i = 0; i < n.parlist.size(); i++) popParl = nlJoin(popParl, "pop");
 		String label = freshFunLabel();
 		n.label = label;
-		System.out.println(n.id + " associated with label: " + n.label);
-
 		putCode(
 				nlJoin(
 						label + ":",
@@ -358,7 +355,7 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 						"sfp", // set $fp to popped value (Control Link)
 						"ltm", // load $tm value (function result)
 						"lra", // load $ra value
-						"js"  // jump to to popped address
+						"js"  // jump to popped address
 				)
 		);
 		return "";
@@ -368,16 +365,10 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 	public String visitNode(ClassNode n) {
 		List<String> dispatchTable = new ArrayList<>();
 
-		for (MethodNode dec : n.methodList)
-			System.out.println("MethodList " + dec.id);
-
 		for (MethodNode dec : n.methodList) {
 			visit(dec);
-			//dispatchTable.add(dec.label);
 			dispatchTable.add(dec.offset, dec.label);
 		}
-
-		// dispatchTables.add(dispatchTable);
 
 		String pushCode = "";
 		for (String method : dispatchTable) {
@@ -392,10 +383,10 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 						"shp"
 					);
 		}
+
 		return nlJoin(
 				"lhp",
 				pushCode
-
 		);
 	}
 
@@ -408,16 +399,13 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 
 	@Override
 	public String visitNode(ClassCallNode n) {
-
-		System.out.println("ClassCallNode: " + n.nl);
-
 		String argCode = null, getAR = null;
 		for (int i = n.arglist.size() - 1; i >= 0; i--) argCode = nlJoin(argCode, visit(n.arglist.get(i)));
 		for (int i = 0; i < n.nl - n.entry.nl; i++) getAR = nlJoin(getAR, "lw");
 
 		return nlJoin(
 				"lfp",
-				argCode, 						// generate code for argument expressions in reversed order
+				argCode, // generate code for argument expressions in reversed order
 				"lfp",
 				getAR, // Retrieve address of frame containing ID1 declaration
 				"push " + n.entry.offset, "add", // Compute address of ID1 declaration
@@ -450,7 +438,6 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 		}
 
 		int address = ExecuteVM.MEMSIZE + n.entry.offset;
-
 		return nlJoin(
 				argCode,
 				"push " + address,	// load on the stack the address
@@ -463,7 +450,5 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 				"add",				// calculate new hp value
 				"shp"				// pop the new value and put it into hp
 		);
-
 	}
-
 }

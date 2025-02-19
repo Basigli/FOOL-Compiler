@@ -5,15 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="323a84bc-aa5e-4433-ad93-19985572358f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/compiler/AST.java" beforeDir="false" afterPath="$PROJECT_DIR$/compiler/AST.java" afterDir="false" />
+      <changelist_data name="MHS-20" email="muhamad.salman2001@gmail.com" date="1738762270000" />
+      <change beforePath="$PROJECT_DIR$/compiler/ASTGenerationSTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/compiler/ASTGenerationSTVisitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/compiler/CodeGenerationASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/compiler/CodeGenerationASTVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/CodeGenerationASTVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/CodeGenerationASTVisitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/quicksort.fool.asm" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/quicksort.fool.asm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/visualsvm/SVMParser$InstructionContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/visualsvm/SVMParser$InstructionContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/visualsvm/SVMParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/visualsvm/SVMParser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quicksort.fool.asm" beforeDir="false" afterPath="$PROJECT_DIR$/quicksort.fool.asm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualsvm/SVMParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/visualsvm/SVMParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/compiler/SymbolTableASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/compiler/SymbolTableASTVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/compiler/TypeCheckEASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/compiler/TypeCheckEASTVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/compiler/TypeRels.java" beforeDir="false" afterPath="$PROJECT_DIR$/compiler/TypeRels.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,16 +35,20 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
+                    <option name="branchName" value="final-grammar" />
+                    <option name="lastUsedInstant" value="1739801615" />
+                  </RecentBranch>
+                  <RecentBranch>
                     <option name="branchName" value="new-grammar" />
-                    <option name="lastUsedInstant" value="1738869088" />
+                    <option name="lastUsedInstant" value="1739801342" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1739794064" />
                   </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="visualsvm" />
                     <option name="lastUsedInstant" value="1738762293" />
-                  </RecentBranch>
-                  <RecentBranch>
-                    <option name="branchName" value="main" />
-                    <option name="lastUsedInstant" value="1738762292" />
                   </RecentBranch>
                 </list>
               </option>
@@ -77,7 +78,7 @@
   &quot;keyToString&quot;: {
     &quot;Application.Test.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;new-grammar&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;final-grammar&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/muham/FOOL-Compiler&quot;,
@@ -107,11 +108,58 @@
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="final-grammar" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="new-grammar" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="visualsvm" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="main" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="final-grammar" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="TEXT_FILTER_SETTINGS">
+                <TextFilterSettings>
+                  <option name="REGEX" value="true" />
+                </TextFilterSettings>
+              </option>
+            </State>
           </value>
         </entry>
       </map>

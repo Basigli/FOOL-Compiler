@@ -124,9 +124,7 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 	@Override
 	public Node visitNot(NotContext c) {
 		if (print) printVarAndProdName(c);
-		System.out.println("NOT EXP: " + c.exp().getText());
 		Node n = new NotNode(visit(c.exp()));
-		System.out.println("NOT: " + n.toString());
 		n.setLine(c.NOT().getSymbol().getLine());
 		return n;
 	}
@@ -318,14 +316,6 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 				}
 			}
 
-
-
-		// print all fiedlist
-		for (FieldNode f : fieldList) {
-			System.out.println(f.id + " " + f.type);
-		}
-
-
 		List<MethodNode> methodList = new ArrayList<>();
 		for (MethdecContext method : c.methdec()) {
 			methodList.add((MethodNode) visit(method));
@@ -339,29 +329,4 @@ public class ASTGenerationSTVisitor extends FOOLBaseVisitor<Node> {
 
 		return n;
 	}
-
-//	@Override
-//	public Node visitClassdec(ClassdecContext c) {
-//		if (print) printVarAndProdName(c);
-//
-//		System.out.print(" IDs: ");
-//		System.out.println(c.ID());
-//
-//		List<FieldNode> fieldList = new ArrayList<>();
-//		for (int i = 1; i < c.ID().size(); i++) {
-//			FieldNode f = new FieldNode(c.ID(i).getText(), (TypeNode) visit(c.type(i)));
-//			f.setLine(c.ID(i).getSymbol().getLine());
-//			fieldList.add(f);
-//		}
-//
-//		List<MethodNode> methodList = new ArrayList<>();
-//		for (DecContext dec : c.dec()) methodList.add((MethodNode) visit(dec));
-//
-//		Node n = null;
-//		if (!c.ID().isEmpty()) { // non-incomplete ST
-//			n = new ClassNode(c.ID(0).getText(), fieldList, methodList);
-//			n.setLine(c.CLASS().getSymbol().getLine());
-//		}
-//		return n;
-//	}
 }

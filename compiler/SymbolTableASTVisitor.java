@@ -97,31 +97,6 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 			stErrors++;
 		}
 
-//		if (n.getType() instanceof  IntTypeNode) {
-//			System.out.println("Var Dec: IntTypeNode");
-//		}
-//
-//		if (n.getType() instanceof  BoolTypeNode) {
-//			System.out.println("Var Dec: BoolTypeNode");
-//		}
-//
-//		if (n.getType() instanceof ClassTypeNode){
-//			System.out.println("Var Dec: ClassTypeNode");
-//			ClassTypeNode classType = (ClassTypeNode) n.getType();
-//			Map<String, STentry> ctable = classTable.get(classType.id);
-//			if (ctable == null){
-//				System.out.println("Class id " + n.id + " at line "+ n.getLine() +" not declared");
-//				stErrors++;
-//			}
-//
-//			RefTypeNode refType = new RefTypeNode(classType.id);
-//			hm.put(n.id, new STentry(nestingLevel, refType, decOffset--));
-//		}else {
-//			// ClassTypeNode classType = (ClassTypeNode) n.getType();
-//			RefTypeNode refType = (RefTypeNode) n.getType();
-//			hm.put(n.id, new STentry(nestingLevel, refType, decOffset--));
-//		}
-
 		return null;
 	}
 
@@ -140,7 +115,10 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 		visit(n.el);
 		return null;
 	}
-	
+
+
+
+
 	@Override
 	public Void visitNode(EqualNode n) {
 		if (print) printNode(n);
@@ -262,7 +240,7 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 		return null;
 	}
 
-	// ------------- OO NODES -------------
+	// ------------- OO EXTENSION -------------
 	@Override
 	public Void visitNode(MethodNode n) {
 		if (print) printNode(n);
@@ -306,6 +284,7 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 		return null;
 	}
 
+
 	@Override
 	public Void visitNode(ClassNode n) {
 		if (print) printNode(n);
@@ -345,7 +324,7 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 			fieldOffset--;
 		}
 
-		// VISIT METHODs
+		// Visit Methods
 		int savedOffset = decOffset;
 		decOffset = methodOffset;
 		if(!n.methodList.isEmpty())
@@ -372,7 +351,6 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 		}
 
 		RefTypeNode ref = (RefTypeNode) entry.type;
-		System.out.println("RefTypeNode ID: " + ref);
 		Map<String, STentry> vtable = classTable.get(ref.id);
 
 		if (vtable == null) {
@@ -382,7 +360,6 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 		}
 
 		if(stLookup(n.id1) == null){
-			// n.entry = symTable.get(nestingLevel).get(n.id1);
 			System.out.println("ID1: " + n.id1 + " at line " + n.getLine() + " not found in vtable");
 			return null;
 		}else{
@@ -403,21 +380,14 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 		return null;
 	}
 
+
 	@Override
 	public Void visitNode(NewNode n) {
 		if (print) printNode(n);
-//      RefTypeNode refType = new RefTypeNode(n.id);
-//		System.out.println(n.arglist.get(1));
-//		Map<String, STentry> hm = symTable.get(nestingLevel);
-//		hm.put(n.id, new STentry(nestingLevel, refType, decOffset--));
-
-		System.out.println("NEW NODE ID: "    + n.id);
-		System.out.println("NEW NODE ARG: "   + n.arglist);
 
 		// Retrieve the STentry of the class ID from the class table
 		Map<String, STentry> vtable = classTable.get(n.id);
 		if (vtable == null) {
-			// System.out.println("Class id " + n.id);
 			System.out.println("Class id " + n.id + " at line " + n.getLine() + " not declared");
 			stErrors++;
 			return null;
@@ -430,7 +400,6 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 			stErrors++;
 			return null;
 		}else {
-			System.out.println("SYMTABLE ENTRY: " + classEntry.type);
 			n.entry = classEntry;
 		}
 
@@ -439,16 +408,15 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 		return null;
 	}
 
+
 	@Override
 	public Void visitNode(EmptyNode n) {
 		if (print) printNode(n);
-		// No specific actions needed for EmptyNode
 		return null;
 	}
 
 	public Void visitNode(RefTypeNode n) {
 		if (print) printNode(n);
-		// No specific actions needed for RefTypeNode
 		return null;
 	}
 }
