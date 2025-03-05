@@ -11,9 +11,3 @@ in
          else { false && true }
       );
 
-  print (
-       if x==8
-         then { true || false }
-         else { false && true }
-      );
-

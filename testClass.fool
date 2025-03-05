@@ -1,0 +1,6 @@
+let
+  class List (f:int) {
+    fun first:int () 0;
+  }
+   var l:List = new List(5);
+in print(l.first());

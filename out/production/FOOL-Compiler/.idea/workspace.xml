@@ -5,60 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="323a84bc-aa5e-4433-ad93-19985572358f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/prova2.fool" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/AST$ArrowTypeNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/AST$ArrowTypeNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/AST$BoolNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/AST$BoolNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/AST$BoolTypeNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/AST$BoolTypeNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/AST$CallNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/AST$CallNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/AST$EqualNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/AST$EqualNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/AST$FunNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/AST$FunNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/AST$IdNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/AST$IdNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/AST$IfNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/AST$IfNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/AST$IntNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/AST$IntNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/AST$IntTypeNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/AST$IntTypeNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/AST$ParNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/AST$ParNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/AST$PlusNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/AST$PlusNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/AST$PrintNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/AST$PrintNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/AST$TimesNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/AST$TimesNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/AST$VarNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/AST$VarNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/AST.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/AST.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/ASTGenerationSTVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/ASTGenerationSTVisitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/CodeGenerationASTVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/CodeGenerationASTVisitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/FOOL.g4" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/FOOL.g4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/PrintEASTVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/PrintEASTVisitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/SymbolTableASTVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/SymbolTableASTVisitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/TypeCheckEASTVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/TypeCheckEASTVisitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLBaseListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLBaseListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLBaseVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLBaseVisitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLLexer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLLexer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$BoolTypeContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$BoolTypeContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$CallContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$CallContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$DecContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$DecContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$EqContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$EqContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$ExpContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$ExpContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$FalseContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$FalseContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$FundecContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$FundecContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$IdContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$IdContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$IfContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$IfContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$IntTypeContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$IntTypeContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$IntegerContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$IntegerContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$LetInProgContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$LetInProgContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$NoDecProgContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$NoDecProgContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$ParsContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$ParsContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$PlusContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$PlusContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$PrintContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$PrintContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$ProgContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$ProgContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$ProgbodyContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$ProgbodyContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$TimesContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$TimesContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$TrueContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$TrueContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$TypeContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$TypeContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$VardecContext.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser$VardecContext.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLParser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/exc/FOOLVisitor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/lib/BaseASTVisitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FOOL-Compiler/compiler/lib/BaseASTVisitor.class" afterDir="false" />
+      <changelist_data name="MHS-20" email="muhamad.salman2001@gmail.com" date="1738762270000" />
+      <change beforePath="$PROJECT_DIR$/compiler/ASTGenerationSTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/compiler/ASTGenerationSTVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/compiler/CodeGenerationASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/compiler/CodeGenerationASTVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/compiler/SymbolTableASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/compiler/SymbolTableASTVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/compiler/TypeCheckEASTVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/compiler/TypeCheckEASTVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/compiler/TypeRels.java" beforeDir="false" afterPath="$PROJECT_DIR$/compiler/TypeRels.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,6 +26,39 @@
     &quot;assignee&quot;: &quot;MHS-20&quot;
   }
 }</component>
+  <component name="GitToolBoxStore">
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="final-grammar" />
+                    <option name="lastUsedInstant" value="1739801615" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="new-grammar" />
+                    <option name="lastUsedInstant" value="1739801342" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1739794064" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="visualsvm" />
+                    <option name="lastUsedInstant" value="1738762293" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
+  </component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/Basigli/FOOL-Compiler.git&quot;,
@@ -89,20 +74,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Test.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/muham/FOOL-Compiler",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Test.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;final-grammar&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/muham/FOOL-Compiler&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\muham\FOOL-Compiler" />
@@ -123,11 +108,58 @@
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="final-grammar" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="new-grammar" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="visualsvm" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="main" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="final-grammar" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="TEXT_FILTER_SETTINGS">
+                <TextFilterSettings>
+                  <option name="REGEX" value="true" />
+                </TextFilterSettings>
+              </option>
+            </State>
           </value>
         </entry>
       </map>

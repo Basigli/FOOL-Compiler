@@ -210,11 +210,21 @@ public class AST {
 	}
 	
 	public static class BoolTypeNode extends TypeNode {
+
+		public String toString() {
+			return "bool";
+		}
+
 		@Override
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
 
 	public static class IntTypeNode extends TypeNode {
+
+		public String toString() {
+			return "int";
+		}
+
 		@Override
 		public <S,E extends Exception> S accept(BaseASTVisitor<S,E> visitor) throws E {return visitor.visitNode(this);}
 	}
@@ -232,9 +242,12 @@ public class AST {
 	public static class MethodNode extends DecNode {
 		final String id;
 		final TypeNode retType;
+		int offset;
 		final List<ParNode> parlist;
 		final List<DecNode> declist;
 		final Node exp;
+		String label = "";
+
 		MethodNode(String i, TypeNode rt, List<ParNode> pl, List<DecNode> dl, Node e) {
 			id=i;
 			retType=rt;
@@ -275,12 +288,15 @@ public class AST {
 	}
 
 	public static class ClassCallNode extends Node {
-		final String id;
+		final String id1;
+		final String id2;
 		final List<Node> arglist;
 		STentry entry;
+		STentry methodEntry;
 		int nl;
-		ClassCallNode(String i, List<Node> a) {
-			id = i;
+		ClassCallNode(String id1, String id2, List<Node> a) {
+			this.id1 = id1;
+			this.id2 = id2;
 			arglist = Collections.unmodifiableList(a);
 		}
 		@Override
