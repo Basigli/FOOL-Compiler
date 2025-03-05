@@ -169,19 +169,19 @@ public class CodeGenerationASTVisitor extends BaseASTVisitor<String, VoidExcepti
 			);
 		} else {	// method case
 			return nlJoin(
-					"lfp", 					// load Control Link (pointer to frame of function "id" caller)
-					argCode, 						// generate code for argument expressions in reversed order
-					"lfp", 							// retrieve address of frame containing "id" declaration
-					getAR, 							// by following the static chain (of Access Links)
-					"stm" ,							// save top of the stack - containing AR
-					"ltm" ,							// load that address
-					"push " + n.entry.offset,		// push function declaration offset
-					"add",							// calculate function declaration address
-					"ltm" ,							// put AR on stack again
-					"push " + (n.entry.offset-1),	// push offset-1 - where the label is -
-					"add",							// calculate function's label address
-					"lw",							// put the address on stack (label of function's subroutine)
-					"js");
+					"lfp", 		    // load Control Link (pointer to frame of function "id" caller)
+					argCode, 				// generate code for argument expressions in reversed order
+					"lfp", 					// retrieve address of frame containing "id" declaration
+					getAR, 					// by following the static chain (of Access Links)
+					"stm", 					// set $tm to popped value (with the aim of duplicating top of stack)
+					"ltm", 					// load Access Link (pointer to frame of function "id" declaration)
+					"ltm", 					// duplicate top of stack
+					"lw",					// load on top of the stack the dispatch pointer
+					"push "+n.entry.offset, // push method offset
+					"add", 					// compute address of "id" declaration
+					"lw", 					// load address of "id" function
+					"js"  					// jump to popped address (saving address of subsequent instruction in $ra)
+			);
 		}
 	}
 

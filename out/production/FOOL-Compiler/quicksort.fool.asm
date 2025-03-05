@@ -15,10 +15,17 @@ lhp
 push 1
 add
 shp
-push function3
+push function2
+lhp
+sw
+lhp
+push 1
+add
+shp
 push function4
-push function6
+push function5
 push function7
+push function8
 push 2
 push 1
 push 4
@@ -212,6 +219,29 @@ function2:
 cfp
 lra
 lfp
+lfp
+lw
+stm
+ltm
+push 1
+add
+ltm
+push 0
+add
+lw
+js
+stm
+sra
+pop
+sfp
+ltm
+lra
+js
+
+function3:
+cfp
+lra
+lfp
 push 2
 add
 lw
@@ -250,10 +280,10 @@ ltm
 lra
 js
 
-function3:
+function4:
 cfp
 lra
-push function2
+push function3
 lfp
 push 1
 add
@@ -292,7 +322,7 @@ stm
 ltm
 ltm
 lw
-push 1
+push 2
 add
 lw
 js
@@ -327,7 +357,7 @@ ltm
 lra
 js
 
-function4:
+function5:
 cfp
 lra
 lfp
@@ -370,7 +400,7 @@ stm
 ltm
 ltm
 lw
-push 1
+push 2
 add
 lw
 js
@@ -421,7 +451,7 @@ ltm
 lra
 js
 
-function5:
+function6:
 cfp
 lra
 lfp
@@ -458,10 +488,10 @@ ltm
 lra
 js
 
-function6:
+function7:
 cfp
 lra
-push function5
+push function6
 lfp
 push 1
 add
@@ -527,7 +557,7 @@ stm
 ltm
 ltm
 lw
-push 1
+push 2
 add
 lw
 js
@@ -573,7 +603,7 @@ stm
 ltm
 ltm
 lw
-push 1
+push 2
 add
 lw
 js
@@ -624,7 +654,7 @@ ltm
 lra
 js
 
-function7:
+function8:
 cfp
 lra
 lfp
@@ -691,7 +721,7 @@ stm
 ltm
 ltm
 lw
-push 1
+push 2
 add
 lw
 js
@@ -750,7 +780,7 @@ stm
 ltm
 ltm
 lw
-push 1
+push 2
 add
 lw
 js

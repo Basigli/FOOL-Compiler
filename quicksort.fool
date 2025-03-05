@@ -2,7 +2,8 @@ let
 
   class List (f:int, r:List) {
     fun first:int() f;
-    fun rest:List() r; 
+    fun rest1:List() r;
+    fun rest:List() rest1();
   }
   
   fun printList:List (l:List) 
@@ -19,8 +20,8 @@ let
         else {new List(l1.first(), append(l1.rest(),l2))} ;  
     
   /* filtra la lista "l" mantenendo solo gli elementi */
-  /* che sono: <= a "pivot", se "before" è true       */
-  /*            > a "pivot", se "before" è false      */
+  /* che sono: <= a "pivot", se "before" ï¿½ true       */
+  /*            > a "pivot", se "before" ï¿½ false      */
   fun filter:List (l:List, pivot:int, before:bool) 
       let
         fun accept:bool (cond:bool)
