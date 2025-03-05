@@ -345,19 +345,19 @@ public class SymbolTableASTVisitor extends BaseASTVisitor<Void,VoidException> {
 
 		STentry entry = stLookup(n.id1);
 		if (entry.type == null) {
-			System.out.println("Class of id1 " + n.id1 + " at line " + n.getLine() + " not declared");
+			System.out.println("Var id1 " + n.id1 + " at line " + n.getLine() + " not declared");
 			stErrors++;
 			return null;
 		}
 
 		RefTypeNode ref;
-		try{
-			ref = (RefTypeNode) entry.type;
-		}catch(ClassCastException e){
+		if (!(entry.type instanceof RefTypeNode)) {
 			System.out.println("ID1: " + n.id1 + " at line " + n.getLine() + " is not a class");
 			stErrors++;
 			return null;
 		}
+		ref = (RefTypeNode) entry.type;
+
 
 		Map<String, STentry> vtable = classTable.get(ref.id);
 
