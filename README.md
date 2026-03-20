@@ -1,3 +1,4 @@
+Documentation of the project can be found here -> https://basigli.github.io/FOOL-Compiler
 # FOOL-Compiler
 
 Compiler based on the ANTLR framework. The custom language support intergers, booleans, functions and classes. It doesn't support inheritance for classes yet.
